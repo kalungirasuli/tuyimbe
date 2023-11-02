@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const CourseMaterial = require("../controllers/images");
+const Images = require("../controllers/images");
 /**
  * @swagger
  * components:

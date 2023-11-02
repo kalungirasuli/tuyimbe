@@ -10,9 +10,9 @@ const bodyParser = require("body-parser");
 const LocalStrategy = require("passport-local").Strategy;
 const database = require("./config/database");
 const Login = require("./routes/loginRoutes");
-const Courses = require("./routes/coursesRoutes"); 
+//const Courses = require("./routes/coursesRoutes"); 
 const AdminProfile = require("./routes/adminProfileRoutes");
-const Facilitator = require("./routes/facilitatorRoutes")
+//const Facilitator = require("./routes/facilitatorRoutes")
 
 
 const CourseMaterial = require("./routes/courseMaterialRoutes")
@@ -27,14 +27,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use("/", Login);
-app.use("/", Courses);
+//app.use("/", Courses);
 app.use("/", AdminProfile);
-app.use("/", Facilitator)
+//app.use("/", Facilitator)
 
-app.use("/",CourseMaterial)
+//app.use("/",CourseMaterial)
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
-mongoose.connect(database.connect, {
+mongoose.connect("mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.0.1", { //use database.connect
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

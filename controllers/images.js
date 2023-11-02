@@ -1,5 +1,5 @@
 const express = require("express");
-const CourseMaterial = require("../models/courseMaterialModel");
+const Images = require("../models/images");
 const multer = require("multer");
 
 const storage = multer.diskStorage({
@@ -19,7 +19,7 @@ module.exports = {
     (upload.single("image"),
     async (req, res) => {
       try {
-        const courseMaterial = new CourseMaterial(req.body);
+        const courseMaterial = new Images(req.body);
         courseMaterial.image = req.file.originalname;
         await courseMaterial.save();
         res.status(200).send("Successfully added course material");
@@ -30,7 +30,7 @@ module.exports = {
 
   get: async (req, res) => {
     try {
-      const courseMaterial = await CourseMaterial.find();
+      const courseMaterial = await Images.find();
       res.status(200).json(courseMaterial);
     } catch (error) {
       res.status(500).send("failed to retrieve the course material");
@@ -39,7 +39,7 @@ module.exports = {
 
   get2: async (req, res) => {
     try {
-      const courseMaterial = await CourseMaterial.findOne({ _id: req.params.id });
+      const courseMaterial = await Images.findOne({ _id: req.params.id });
       res.status(200).json(courseMaterial);
     } catch (error) {
       res.status(500).send("failed to find the required course material");
@@ -48,7 +48,7 @@ module.exports = {
 
   put: async (req, res) => {
     try {
-      const courseMaterial = await CourseMaterial.findOneAndUpdate(
+      const courseMaterial = await Images.findOneAndUpdate(
         { _id: req.params.id },
         req.body,
         { new: true }
@@ -61,7 +61,7 @@ module.exports = {
 
   delete: async (req, res) => {
     try {
-      await CourseMaterial.findOneAndDelete({ _id: req.params.id });
+      await Images.findOneAndDelete({ _id: req.params.id });
       res.status(200).send("successfully deleted course material record");
     } catch (error) {
       res.status(500).send("failed to delete course material");

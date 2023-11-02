@@ -1,5 +1,5 @@
 const express = require("express");
-const User = require("../models/loginModel");
+const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
 
 module.exports = {
