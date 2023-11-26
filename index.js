@@ -15,7 +15,7 @@ const AdminProfile = require("./routes/adminProfileRoutes");
 //const Facilitator = require("./routes/facilitatorRoutes")
 
 
-const CourseMaterial = require("./routes/courseMaterialRoutes")
+const Uploads = require("./routes/imageUploads")
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocs = require("./swagger");
 
@@ -31,10 +31,10 @@ app.use("/", Login);
 app.use("/", AdminProfile);
 //app.use("/", Facilitator)
 
-//app.use("/",CourseMaterial)
+app.use("/",Uploads)
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
-mongoose.connect("mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.0.1", { //use database.connect
+mongoose.connect("mongodb+srv://kalungirasuli495:Kalungi2002@cluster0.i00y4ap.mongodb.net/?retryWrites=true&w=majority", { //use database.connect
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -56,5 +56,5 @@ db.on("error", (err) => {
 // passport.deserializeUser(User.deserializeUser());
 
 app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
+  console.log(`https:${port}`);
 });

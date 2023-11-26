@@ -1,32 +1,39 @@
-const express = require("express");
-const Images = require("../models/images");
-const multer = require("multer");
-
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "./public/images");
-  },
-  filename: (req, file, cb) => {
-    cb(null, file.originalname);
-  },
-});
-
-let upload = multer({ storage: storage });
+const express = require('express');
+const multer = require('multer');
+const path = require('path');
+const app = express();
+const upload = multer({ dest: 'uploads/' });
+const Upload=require('../models/images')
 
 module.exports = {
 
   post:
-    (upload.single("image"),
-    async (req, res) => {
-      try {
-        const courseMaterial = new Images(req.body);
-        courseMaterial.image = req.file.originalname;
-        await courseMaterial.save();
-        res.status(200).send("Successfully added course material");
-      } catch (error) {
-        res.status(500).send("Failed to Post new Module");
-      }
-    }),
+  ('/upload', upload.array(['image', 'audio']), async(req, res) => {
+    const imageFile = req.files['image'][0];
+    const audioFile = req.files['audio'][0];
+
+    const now = new Date();
+    const timestamp = now.toISOString().replace(/:/g, '-').replace(/\..+/, '');
+
+    const data = {
+      image: `${imageFile.path}-${timestamp}`,
+      audio: `${audioFile.path}-${timestamp}`,
+      description: req.body.des
+    };
+  const uploading= await Upload(data)
+    try {
+      await uploading.save();
+      res.status(201).send('File uploaded!');
+      console.log('File uploaded!');
+    } catch (err) {
+      res.status(400).send('Error uploading file!');
+      console.log('Error uploading file!'); 
+    }
+
+  })
+
+  
+ ,
 
   get: async (req, res) => {
     try {

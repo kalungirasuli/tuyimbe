@@ -1,14 +1,14 @@
 const mongoose = require("mongoose");
 
-const images = new mongoose.Schema({
+const uploads = new mongoose.Schema({
     
     audio: {
         type: String,
-        default: null,
+        required:true,
     },
-    images: {
+    image: {
         type: String,
-        default: null,
+        required:true,
     },
     description:{
         type:String,
@@ -18,4 +18,4 @@ const images = new mongoose.Schema({
    
 });
 
-module.exports = mongoose.model("imageContent", images);
+module.exports = mongoose.model("Upload", uploads);
