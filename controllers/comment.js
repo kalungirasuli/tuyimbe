@@ -1,11 +1,10 @@
-const Module = require("../models/courseModulesModel");
 
-const CourseModule = require("../models/courseModulesModel");
+const CourseModule = require("../models/comments");
 
 module.exports = {
 
-  // this creates a new  course modules in the modules for a  course
-  addModules: async (req, res) => {
+  // this creates a new  course comments in the comments for a  course
+  addcomments: async (req, res) => {
     try {
       const { course_model, course_name, course_description } = req.body;
 
@@ -20,10 +19,10 @@ module.exports = {
       // Save the course module to the database
       await newModule.save();
 
-      // Add the module to the course's modules array
+      // Add the module to the course's comments array
       const courseAdmin = awaitCourseModule.findByIdAndUpdate(
         courseId,
-        { $push: { modules: newModule } },
+        { $push: { comments: newModule } },
         { new: true }
       );
 
@@ -33,22 +32,22 @@ module.exports = {
       res.status(500).json({ error: 'Internal server error' });
     }
   },
-  getAllModulesForCourse: async (req, res) => {
+  getAllcommentsForCourse: async (req, res) => {
     try {
       const courseId  = req.params.id; 
-      const course = awaitCourseModule.findById(courseId).populate('modules');
+      const course = awaitCourseModule.findById(courseId).populate('comments');
 
       if (!course) {
         return res.status(404).json({ error: 'Course not found' });
       }
 
-      res.status(200).json(course.modules);
+      res.status(200).json(course.comments);
     } catch (error) {
       console.error('Error:', error);
       res.status(500).json({ error: 'Internal server error' });
     }
   },
-  deleteAllModulesForCourse: async (req, res) => {
+  deleteAllcommentsForCourse: async (req, res) => {
     try {
       const courseId  = req.params.id; // Extract the course ID from the request parameters
 
@@ -61,10 +60,10 @@ const moduleId = req.params.id     // Find the course by its ID
 
       course.content.findByIdAndDelete(moduleId)
 
-      // Save the updated course without modules
+      // Save the updated course without comments
       await course.save();
 
-      res.status(200).json({ message: 'All modules deleted for the course' });
+      res.status(200).json({ message: 'All comments deleted for the course' });
     } catch (error) {
       console.error('Error:', error);
       res.status(500).json({ error: 'Internal server error' });

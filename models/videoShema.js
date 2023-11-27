@@ -4,10 +4,14 @@ const videos = new mongoose.Schema({
     
     video: {
         type: String,
-        default: null,
+        required:true,
+    },
+    description:{
+        type:String,
+        required:true
     },
    
    
 });
 
-module.exports = mongoose.model("videoContent", videos);
+module.exports = mongoose.model("Video", videos);

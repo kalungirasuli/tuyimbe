@@ -1,6 +1,18 @@
 const express = require("express");
 const router = express.Router();
 const Images = require("../controllers/images");
+const multer = require("multer");
+const storage = multer.diskStorage({
+    destination: (req, file, cb)=>{
+        cb(null, "./public");
+    },
+    filename:(req, file, cb)=>{
+      const name = file.originalname.toString().split(" ").join("_")
+        cb(null ,Date.now()+"_"+name);
+    },
+});
+let upload = multer({storage: storage});
+const multplefield=upload.fields([{name:'image'},{name:'audio'}])
 /**
  * @swagger
  * components:
@@ -63,7 +75,7 @@ const Images = require("../controllers/images");
  *       500:
  *         description: Some server error
  */
-router.post("/images", Images.post);
+router.post("/images",multplefield,Images.post);
 /**
  * @swagger
  * /courseMaterial:

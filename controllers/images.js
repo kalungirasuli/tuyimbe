@@ -2,31 +2,33 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const app = express();
-const upload = multer({ dest: 'uploads/' });
 const Upload=require('../models/images')
 
 module.exports = {
 
   post:
-  ('/upload', upload.array(['image', 'audio']), async(req, res) => {
-    const imageFile = req.files['image'][0];
-    const audioFile = req.files['audio'][0];
-
-    const now = new Date();
-    const timestamp = now.toISOString().replace(/:/g, '-').replace(/\..+/, '');
-
-    const data = {
-      image: `${imageFile.path}-${timestamp}`,
-      audio: `${audioFile.path}-${timestamp}`,
-      description: req.body.des
-    };
-  const uploading= await Upload(data)
+  ( async(req, res) => {
+ 
     try {
+      const description = req.body.description;
+      const audiopaths = req.files['audio'].map(file => file.path);
+      const imagepaths = req.files['image'].map(file => file.path);
+      const imagedata= imagepaths.map(image=>`${image}`).toString()
+      const audiodata= audiopaths.map(audio=>`${audio}`).toString()
+      const data = {
+        image: imagedata,
+        audio: audiodata,
+        description: description,
+      };
+      console.log(data);
+      const uploading= await  Upload(data);
       await uploading.save();
       res.status(201).send('File uploaded!');
-      console.log('File uploaded!');
+      console.log(`File uploaded! ${uploading}`);
+      
     } catch (err) {
       res.status(400).send('Error uploading file!');
+      console.error(err);
       console.log('Error uploading file!'); 
     }
 
@@ -37,10 +39,11 @@ module.exports = {
 
   get: async (req, res) => {
     try {
-      const courseMaterial = await Images.find();
-      res.status(200).json(courseMaterial);
+     res.render('upload')
+      // const courseMaterial = await Images.find();
+      // res.status(200).json(courseMaterial;
     } catch (error) {
-      res.status(500).send("failed to retrieve the course material");
+      res.status(500).send("Failed to retrive page for uploading");
     }
   },
 

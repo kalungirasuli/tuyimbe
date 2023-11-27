@@ -9,29 +9,20 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const LocalStrategy = require("passport-local").Strategy;
 const database = require("./config/database");
-const Login = require("./routes/loginRoutes");
-//const Courses = require("./routes/coursesRoutes"); 
-const AdminProfile = require("./routes/adminProfileRoutes");
-//const Facilitator = require("./routes/facilitatorRoutes")
-
+const ejs = require("ejs");
 
 const Uploads = require("./routes/imageUploads")
+const Video = require("./routes/video")
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocs = require("./swagger");
 
-// malter middlware 
-// app.use(express.static(path.join(__dirname , "public/products")))
+app.set("view engine", "ejs");
 app.use(express.static('public'));
-app.use('/images/facilitators', express.static('images/faclitators'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
-app.use("/", Login);
-//app.use("/", Courses);
-app.use("/", AdminProfile);
-//app.use("/", Facilitator)
-
 app.use("/",Uploads)
+app.use("/",Video)
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 mongoose.connect("mongodb+srv://kalungirasuli495:Kalungi2002@cluster0.i00y4ap.mongodb.net/?retryWrites=true&w=majority", { //use database.connect

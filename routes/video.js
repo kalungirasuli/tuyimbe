@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const Facilitator = require("../controllers/facilitatorControllers");
+const video = require("../controllers/video")
 const multer = require("multer");
 const storage = multer.diskStorage({
     destination: (req, file, cb)=>{
-        cb(null, "./public");
+        cb(null, "./public/files");
     },
     filename:(req, file, cb)=>{
       const name = file.originalname.toString().split(" ").join("_")
@@ -17,7 +17,7 @@ let upload = multer({storage: storage});
  * @swagger
  * components:
  *   schemas:
- *      Add Facilitator:
+ *      Add video:
  *       type: object  
  *       properties:
  *         id:
@@ -38,103 +38,103 @@ let upload = multer({storage: storage});
  /**
   * @swagger
   * tags:
-  *   name: Add Facilitator
+  *   name: Add video
   *   description: This is used for managing the course mdules for the courses 
   */
 
 /**
  * @swagger
- * /facilitator:
+ * /video:
  *   post:
  *     summary: Create a new course Module
- *     tags: [Add Facilitator]
+ *     tags: [Add video]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Add Facilitator'
+ *             $ref: '#/components/schemas/Add video'
  *     responses:
  *       200:
  *         description: The Course was successfully created
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Add Facilitator'
+ *               $ref: '#/components/schemas/Add video'
  *       500:
  *         description: Some server error
  */
-router.post("/facilitator",upload.single('image'), Facilitator.post);
+router.post("/video",upload.single('video'), video.post);
 /**
  * @swagger
- * /facilitator/:
+ * /video/:
  *   get:
  *     summary: Returns the list of all the Courses
- *     tags: [Add Facilitator]
+ *     tags: [Add video]
  *     responses:
  *       200:
- *         description: The list of the Add Facilitators
+ *         description: The list of the Add videos
  *         content:
  *           application/json:
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/Add Facilitator'
+ *                 $ref: '#/components/schemas/Add video'
  */
-router.get("/facilitator", Facilitator.get);
+router.get("/video", video.get);
 /**
  * @swagger
- * /facilitator:
+ * /video:
  *   get:
  *     summary: Get the Course Module by id
- *     tags: [Add Facilitator]
+ *     tags: [Add video]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: The Add Facilitator id
+ *         description: The Add video id
  *     responses:
  *       200:
  *         description: The course description by id
  *         contens:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Add Facilitator'
+ *               $ref: '#/components/schemas/Add video'
  *       404:
- *         description: The Facilitator  was not found
+ *         description: The video  was not found
  */
 
 
-router.get("/facilitator/:id", Facilitator.getdetails);
+router.get("/video/:id", video.getdetails);
 /**
  * @swagger
- * /facilitator/(id):
+ * /video/(id):
  *   delete:
  *     summary: Remove the Course Module by id
- *     tags: [Add Facilitator]
+ *     tags: [Add video]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: The  Facilitator id
+ *         description: The  video id
  * 
  *     responses:
  *       200:
- *         description: The  Facilitator was deleted
+ *         description: The  video was deleted
  *       404:
- *         description: The Facilitator was not found
+ *         description: The video was not found
  */
-router.delete("/facilitator/:id", Facilitator.delete);
+router.delete("/video/:id", video.delete);
 /**
  * @swagger
- * /facilitator/(id):
+ * /video/(id):
  *  put:
  *    summary: Update the Course Module by the id
- *    tags: [Add Facilitator]
+ *    tags: [Add video]
  *    parameters:
  *      - in: path
  *        name: id
@@ -147,19 +147,19 @@ router.delete("/facilitator/:id", Facilitator.delete);
  *      content:
  *        application/json:
  *          schema:
- *            $ref: '#/components/schemas/Add Facilitator'
+ *            $ref: '#/components/schemas/Add video'
  *    responses:
  *      200:
  *        description: The course was updated
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/Add Facilitator'
+ *              $ref: '#/components/schemas/Add video'
  *      404:
- *        description: The  Facilitator was not found
+ *        description: The  video was not found
  *      500:
  *        description: Some error happened
  */
-router.put("/facilitator/:id", Facilitator.put);
+router.put("/video/:id", video.put);
 
 module.exports = router;
