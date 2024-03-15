@@ -10,14 +10,16 @@ module.exports = {
             const description=req.body.description
             const videopath= req.file.path
             const video= videopath
+            const pathvideo=video.split(`\\`)
+            const genpath='/'+pathvideo[1]+'/'+pathvideo[2]
+           
             const data={
                 description,
-                video
+                video:genpath
             }
             const videos = await Video(data);
-            console.log(video)
             await videos.save();
-            res.status(200).send("Video added as a successfully");
+            res.status(200).redirect('/dashboard');
         }catch (error){
             res.status(500).send("Video cant be added"+" : " +error);
             console.log(error)
@@ -38,24 +40,37 @@ module.exports = {
     },
 
     put: async(req,res)=>{
-      try{  const updatedVideo = await Video.findOneAndUpdate(
-            {id: req.params.id},
-            req.body,
+      try{  
+
+        const description=req.body.description
+        const videopath= req.file.path
+        const video= videopath
+        const pathvideo=video.split(`\\`)
+        const genpath='/'+pathvideo[1]+'/'+pathvideo[2]
+       
+        const data={
+            description,
+            video:genpath
+        }
+            const updatedVideo = await Video.findOneAndUpdate(
+            {_id:req.query.id},
+            {...data},
             {new: true}
         );
-        if (!updatedVideo){
-            return res.status(401).send({message:"update didnot happen"});
-        }
-        res.status(200).send({message: "Video details updated"});
+        console.log(updatedVideo)
+       await updatedVideo.save()
+        res.status(200).redirect('/dashboard');
     } catch(error){
+        console.log(error)
         res.status(500).send({error: "error updating Video"});
     }
     },
 
     delete: async(req,res)=>{
         try{
-            await Video.findOneAndDelete({id: req.params.id});
-            res.status(200).send('Video deleted')
+            console.log(req.query.id)
+            await Video.findOneAndDelete({_id: req.query.id});
+            res.status(200).redirect('/dashboard')
         } catch(error){
             res.status(500).send("failed to delete Video");
         }

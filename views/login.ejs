@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3 style="color:blue;font-size: 30px; text-align: center;">Student Entry</h3>
+    <form action="/login" method="post" style="background-color:whitesmoke; width:50%;margin:auto;border-radius: 10px;display: flex;flex-direction: column;gap: 20px;">
+        <h1 style="color:blue;font-size: 30px; text-align: center;">Please the form below to login</h1>
+        <div style="width:80%;height:55px; margin:auto;display: flex; flex-direction: column;">
+            <label for="email" style="padding: 5px;font-size: 17px;">Email</label>
+            <input type="text" name="email" id="email" style="padding:5px; font-size: 17px;" placeholder="Enter email please">
+        </div>
+        <div style="width:80%;height:55px;margin:auto; display: flex; flex-direction: column;">
+            <label for="password" style="padding: 5px;font-size: 17px;">Password</label>
+            <input type="text" name="password" id="password" style="padding:5px; font-size: 17px;" placeholder="Enter password please">
+        </div>
+        <div style="align-items: center; margin:auto;width: 100px; padding: 20px;">
+            <button type="submit" style="height:50px;padding:10px;background-color: blue;width:100px;border-radius: 10px; border: white 2px solid; color:white;font-size: 20px;">Login</button>
+            <button  style="height:50px;padding:10px;background-color: blue;width:100px;border-radius: 10px; border: white 2px solid; color:white;font-size: 20px;"><a href="/signup" style="text-decoration: none;color:white">Signup</a></button>
+        </div>
+    </form>
+    <h3 style="color:blue;font-size: 30px; text-align: center;">Admin Entry</h3>
+    <form action="/Adminlogin" method="post" style="background-color:whitesmoke; width:50%;margin:auto;border-radius: 10px;display: flex;flex-direction: column;gap: 20px;">
+        <div style="width:80%;height:55px; margin:auto;display: flex; flex-direction: column;">
+            <label for="email" style="padding: 5px;font-size: 17px;">Email</label>
+            <input type="text" name="email" id="email" style="padding:5px; font-size: 17px;" placeholder="Enter email please">
+        </div>
+        <div style="width:80%;height:55px;margin:auto; display: flex; flex-direction: column;">
+            <label for="password" style="padding: 5px;font-size: 17px;">Password</label>
+            <input type="text" name="password" id="password" style="padding:5px; font-size: 17px;" placeholder="Enter password please">
+        </div>
+        <div style="align-items: center; margin:auto;width: 100px; padding: 20px;">
+            <button type="submit" style="height:50px;padding:10px;background-color: blue;width:100px;border-radius: 10px; border: white 2px solid; color:white;font-size: 20px;">Login</button>    
+        </div>
+    </form>
+</body>
+</html>

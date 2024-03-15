@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      body {
+          font-family: Arial, sans-serif;
+          background-color: #f4f4f4;
+          margin: 0;
+          padding: 20px;
+          display: grid;
+          grid-template-rows: 60% 40%
+      }
+      .card {
+          background-color: #fff;
+          border-radius: 5px;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+          padding: 20px;
+          margin-bottom: 20px;
+      }
+      .card-image {
+          width: 100%;
+          max-width: 400px;
+          height: auto;
+          margin-bottom: 10px;
+      }
+      .audio-player {
+          width: 100%;
+          margin-bottom: 10px;
+      }
+      .comment-input {
+          width: 100%;
+          padding: 10px;
+          border-radius: 5px;
+          border: 1px solid #ccc;
+          margin-bottom: 10px;
+      }
+      .submit-btn {
+          padding: 10px 20px;
+          background-color: #007bff;
+          color: #fff;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+      }
+      .submit-btn:hover {
+          background-color: #0056b3;
+      }
+      .divider{
+          display: grid;
+          grid-template-columns: repeat(2,1fr);
+          grid-gap:10px;
+      }
+      .heading{
+          color:blue;
+          font-size: 30px;
+          text-align: center;
+          padding: 20px;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+      }
+      .main .no{
+          text-align: center;
+          font-size: 25px;
+          font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+          font-weight: 100;
+
+      }
+
+      .video-player {
+          width: 100%;
+          height: auto;
+      }
+
+      .card-content {
+          padding: 20px;
+      }
+      .files{
+        display: grid;
+        grid-template-columns:45% 45%;
+        grid-gap:20px;
+      }
+      ul{
+        display: flex;
+        flex-direction: row;
+      }
+      ul li{
+        list-style-type: none;
+        padding: 10px;
+        color: #007bff;
+      }
+      a{
+        text-decoration: none;
+      }
+      a:hover{
+        color:black
+      }
+      .nav{
+        display: grid;
+        grid-template-columns: 65% 30%;
+        grid-gap:5%;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        padding: 5px;
+      }
+  </style>
+</head>
+<body>
+<div class="nav">
+  <div class="logo">
+    <h5><a href="/">ABATO TUYEMBE</a></h5>
+  </div>
+    <ul>
+    <li><a href="/pannel">Upload</a></li>
+    <li><a href="/comment">Comments</a></li>
+    <li><a href="/logout">Logout</a></li>
+  </ul>
+</div>
+<div class="files" >
+  <div class="video" style="display: grid;grid-template-columns: repeat(2,1fr); grid-gap:20px;text-align: center;padding: 20px;">
+      <% if(video.length>0) {%>
+        <% video.forEach(video => { %>
+      <div class="card">
+      <p><%= video._id %></p>
+        <video controls class="video-player">
+            <source src="<%= video.video %>" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="des">
+          <p><%= video.description%></p>
+        </div>
+        <button style="background-color: orange; padding: 10px; border-radius:5px; color:white"><a href="/update/videopage?id=<%=video._id%>">Update</a></button>
+        <button style="background-color:red; padding: 10px; color:white; border-radius:5px;"><a href="/delete/video?id=<%=video._id%>">Delete</a></button>
+      </div>
+   
+
+      <% }) %>
+      <% } else { %>
+        <p>No data available.</p>
+        <% } %>
+      </div>
+  <div class="image"  style="display: grid;grid-template-columns: repeat(2,1fr); grid-gap:20px;text-align: center;max-height: 400px ;padding: 20px;">
+    <% if (image.length > 0) { %>
+      <% image.forEach(item => { %>
+          <div class="card">
+              <p><%=item._id %></p>
+              <img class="card-image" src="<%= item.image%>" alt="Card Image">
+              <audio controls class="audio-player">
+                  <source src="<%= item.audio %>" type="audio/mpeg">
+                  Your browser does not support the audio element.
+              </audio>
+              <p><%= item.description %></p>
+              <button style="background-color: orange; padding: 10px; color:white"><a href="/update/imagepage?id=<%=item._id%>">Update</a></button>
+              <button style="background-color:red; padding: 10px; color:white"><a href="/delete/image?id=<%=item._id%>">Delete</a></button>
+          </div>
+      <% }); %>
+  <% } else { %>
+      <p>No data available.</p>
+  <% } %>
+  </div>
+  </div>
+
+</div>
+<div style="width:70%;margin:auto ;overflow-y: auto;  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);padding: 20px;">
+  <h1 style="text-align: center;">users registered</h1>
+  <table style="background-color: whitesmoke; width: 100%; border-radius: 10px;">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (user.length>0) { %>
+       <% user.forEach(user => { %>
+        <tr style="text-align: center ;">
+          <td style="padding: 10px;"><%= user.fullName %></td>
+          <td style="padding: 10px;"><%= user.email %></td>
+        </tr>
+       <% }) %>
+      <% } else{ %>
+          <p>No users on registered</p>
+        <% } %>
+      
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

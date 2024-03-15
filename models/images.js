@@ -12,8 +12,8 @@ const uploads = new mongoose.Schema({
     },
     description:{
         type:String,
-        default:null
-    }
+        required:true
+    },
    
    
 });

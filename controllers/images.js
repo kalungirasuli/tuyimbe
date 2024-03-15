@@ -15,15 +15,17 @@ module.exports = {
       const imagepaths = req.files['image'].map(file => file.path);
       const imagedata= imagepaths.map(image=>`${image}`).toString()
       const audiodata= audiopaths.map(audio=>`${audio}`).toString()
+      const pathimage=`/`+ imagedata.split(`\\`)[1]
+      const pathaudio=`/`+ audiodata.split(`\\`)[1]
+      console.log(pathaudio)
       const data = {
-        image: imagedata,
-        audio: audiodata,
+        image: pathimage,
+        audio: pathaudio,
         description: description,
       };
-      console.log(data);
       const uploading= await  Upload(data);
       await uploading.save();
-      res.status(201).send('File uploaded!');
+      res.status(201).redirect('/dashboard');
       console.log(`File uploaded! ${uploading}`);
       
     } catch (err) {
@@ -32,49 +34,58 @@ module.exports = {
       console.log('Error uploading file!'); 
     }
 
-  })
-
-  
- ,
-
-  get: async (req, res) => {
+  }),
+  getpage: async (req, res) => {
     try {
-     res.render('upload')
-      // const courseMaterial = await Images.find();
-      // res.status(200).json(courseMaterial;
+     
+      res.render('pannel')
     } catch (error) {
       res.status(500).send("Failed to retrive page for uploading");
     }
   },
 
-  get2: async (req, res) => {
-    try {
-      const courseMaterial = await Images.findOne({ _id: req.params.id });
-      res.status(200).json(courseMaterial);
-    } catch (error) {
-      res.status(500).send("failed to find the required course material");
-    }
-  },
-
+  
   put: async (req, res) => {
     try {
-      const courseMaterial = await Images.findOneAndUpdate(
-        { _id: req.params.id },
-        req.body,
+      const description = req.body.description;
+      const audiopaths = req.files['audio'].map(file => file.path);
+      const imagepaths = req.files['image'].map(file => file.path);
+      const imagedata= imagepaths.map(image=>`${image}`).toString()
+      const audiodata= audiopaths.map(audio=>`${audio}`).toString()
+      const pathimage=`/`+ imagedata.split(`\\`)[1]
+      const pathaudio=`/`+ audiodata.split(`\\`)[1]
+      console.log(description)
+      console.log(pathaudio)
+      const data = {
+        image: pathimage,
+        audio: pathaudio,
+        description: description,
+      };
+      console.log(data);
+      console.log(data)
+      const content = await Upload.findOneAndUpdate(
+        { _id: req.query.id },
+        {...data},
         { new: true }
       );
-      res.status(200).json(courseMaterial);
+      console.log(content)
+      await content.save()
+      const saved=await Upload.findOne({_id:req.query.id})
+      console.log(saved)
+      res.status(200).redirect('/dashboard');
     } catch (error) {
-      res.status(500).send("failed to update course materials");
+      console.log(error)
+      res.status(500).send("failed to update materials");
     }
   },
+  delete:async(req,res)=>{
+    try{
+      await Upload.findOneAndDelete({_id:req.query.id})
+      res.status(200).redirect('/dashboard')
+    }catch(err){
+      console.log(err)
+      res.send('error occured when deleting image')
+    }
+  }
 
-  delete: async (req, res) => {
-    try {
-      await Images.findOneAndDelete({ _id: req.params.id });
-      res.status(200).send("successfully deleted course material record");
-    } catch (error) {
-      res.status(500).send("failed to delete course material");
-    }
-  },
 };

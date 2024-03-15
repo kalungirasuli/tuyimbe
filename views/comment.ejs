@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<div style="width:70%; background-color: whitesmoke;border-radius: 10px;margin: auto; padding: 20px;">
+  <h1>users and comments</h1>
+  <table style="width:100%;">
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>File ID</th>
+        <th>Comment</th>
+        <th>Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (comment.length>0) { %>
+       <% comment.forEach(comment => { %>
+        <tr>
+          <td style="padding: 10px;"><%= comment.email %></td>
+          <td style="padding: 10px;"><%= comment.id %></td>
+          <td style="padding: 10px;"><%= comment.comment %></td>
+          <td style="padding: 10px;"><%= comment.time %></td>
+         <td></td>
+        </tr>
+       <% }) %>
+      <% } %>  
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

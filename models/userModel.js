@@ -6,24 +6,23 @@ const logInModel = mongoose.Schema({
     email:{
         type:String,
         trim:true,
-        default:null
+        required:true
     },
     fullName:{
         type: String,
         trim:true,
-        default:null
+        required:true
     },
     password:{
         type:String,
         trim:true,
-        default:null
+        required:true
     },
-    userGroup:{
+    role:{
         type:String,
-        trim:true,
-        default:null
-    }
+        default:"user"
+    },
+   
 })
 
-// logInModel.plugin(passportLocalMongoose,);
 module.exports = mongoose.model('User',logInModel);

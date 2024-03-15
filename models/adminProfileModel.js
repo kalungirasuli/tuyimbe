@@ -3,19 +3,23 @@ const mongoose = require("mongoose");
 const adminSchema = new mongoose.Schema({
   firstName: {
     type: String,
-    default: null,
+    required:true
   },
   lastName: {
     type: String,
-    default: null,
+    required:true
   },
   residence: {
     type: String,
-    default: null,
+    required:true
   },
   email: {
     type: String,
-    default: null,
+    required:true
+  },
+  password:{
+    type:String,
+    required:true
   },
   role: {
     type: String,

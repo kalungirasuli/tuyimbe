@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Admin Profile</title>
+</head>
+<body>
+    <h1>Update Admin Profile</h1>
+    <form action="/admin/update/<%= admin._id %>" method="POST">
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" value="<%= admin.email %>" required><br><br>
+        
+        <label for="password">New Password:</label><br>
+        <input type="password" id="password" name="password" required><br><br>
+        
+        <input type="submit" value="Update Profile">
+    </form>
+</body>
+</html>

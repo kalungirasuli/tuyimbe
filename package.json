@@ -1,5 +1,5 @@
 {
-  "name": "rls-api",
+  "name": "tuyembe-server",
   "version": "1.0.0",
   "description": "This documentation provides an overview of the different branches in the repository and their purposes. It aims to help the team understand the workflow and purpose of each branch.",
   "main": "index.js",
@@ -20,6 +20,7 @@
     "ejs": "^3.1.9",
     "express-session": "^1.17.3",
     "fs": "^0.0.1-security",
+    "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.1.0",
     "mongoose": "^7.5.2",
     "multer": "^1.4.5-lts.1",

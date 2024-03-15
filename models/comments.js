@@ -4,17 +4,20 @@ const videos = new mongoose.Schema({
     
     comment: {
         type: String,
-        default: null,
+        required:true
     },
-   videoid:{
+   id:{
     type:String,
     required:true
    },
-   userId:{
+   email:{
     type:String,
     required:true
+   },
+   time:{
+    type:Date,
+    default:Date.now()
    }
-   
 });
 
 module.exports = mongoose.model("videoContent", videos);

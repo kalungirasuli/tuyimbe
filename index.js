@@ -2,30 +2,29 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const mongoose = require("mongoose");
-const passport = require("passport");
-const session = require("express-session");
-const port = process.env.PORT || 5000;
-const cors = require("cors");
+const port =  5000;
+const ejs= require('ejs')
 const bodyParser = require("body-parser");
-const LocalStrategy = require("passport-local").Strategy;
-const database = require("./config/database");
-const ejs = require("ejs");
-
 const Uploads = require("./routes/imageUploads")
 const Video = require("./routes/video")
-const swaggerUi = require("swagger-ui-express");
-const swaggerDocs = require("./swagger");
+const Login=require('./routes/login')
+const Admin=require('./routes/Admin')
+const index=require('./routes/indexpage')
+const comment = require('./routes/comment')
+const dotenv=require('dotenv')
 
-app.set("view engine", "ejs");
+dotenv.config()
+app.set("view engine", 'ejs');
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
 app.use("/",Uploads)
 app.use("/",Video)
-
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
-mongoose.connect("mongodb+srv://kalungirasuli495:Kalungi2002@cluster0.i00y4ap.mongodb.net/?retryWrites=true&w=majority", { //use database.connect
+app.use('/',Login)
+app.use('/',Admin)
+app.use('/',index)
+app.use('/',comment)
+mongoose.connect("mongodb://localhost:27017", {//use database.connect
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -37,15 +36,7 @@ db.once("open", () => {
 db.on("error", (err) => {
   console.error(err);
 });
-//app.use(express.static(path.join(__dirname, "public/images/facilitators")));
-
-// app.use(passport.initialize());
-// app.use(passport.session());
-
-// passport.use(new LocalStrategy(User.authenticate()));
-// passport.serializeUser(User.serializeUser());
-// passport.deserializeUser(User.deserializeUser());
-
+app.use(express.static(path.join(__dirname, "public/files")));
 app.listen(port, () => {
   console.log(`https:${port}`);
 });
