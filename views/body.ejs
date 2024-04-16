@@ -139,92 +139,64 @@
     </header>
 
     <main>
-        <div class="left">
-            <div class="btns">
-                <a href="/index"><i class="fas fa-home"></i> <span>VIDEOS</span></a>
-                <a href="/learn"><i class="fas fa-user-friends"></i> <span>Learn</span></a>
-                <a href="/login"><i class="fas fa-user-friends"></i> <span>Login</span></a>
-                <a href="/signup"><i class="fas fa-user-friends"></i> <span>signup</span></a>
-                <a href="/Adminsignup">Admin</a>
-              </div>
-          
-            <div class="accounts">
-                <p>Suggested topics</p>
-                
-                <div class="user">
-                    <img src="./assets/Frankenstein.png" alt="avatar">
-                    <a href="domestic" class="username">Domestic Animals</a>
-                </div>
-                <div class="user">
-                    <img src="./assets/Pirate.png" alt="avatar">
-                    <a href="bodyparts" class="username">Body Parts</a>
-                </div>
-                <div class="user">
-                    <img src="./assets/Gypsy.png" alt="avatar">
-                    <a href="/features" class="username">Physical features</a>
-                </div>
+      <div class="left">
+        <div class="btns">
+            <a href="/learn"><i class="fas fa-user-friends"></i> <span>Learn</span></a>
+            <a href="/Adminsignup">Admin</a>
+          </div>
+        <div class="accounts">
+            <p>Suggested topics</p>
+            
+            <div class="user">
+                <a href="/domestic" class="username">Domestic Animals</a>
             </div>
-            <div class="tags">
-                <p>Discover</p>
-                <div>
-                    <a href="#"># childrensbook</a>
-                    <a href="#"># summeressentials</a>
-                    <a href="#"># child'smusic</a>
-                    <a href="#"># child hoodmemories</a>
-                    <a href="#"># whoisbetter</a>
-                    <a href="#"># uganimations</a>
-                    <a href="#"># summeressentials</a>
-                    <a href="#"># music</a>
-                    <a href="#"># memories</a>
-                    <a href="#"># whoisbetter</a>
-                </div>
+            <div class="user">
+                <a href="/bodyparts" class="username">Body Parts</a>
             </div>
-            <div class="links">
-                <div>
-                    <div class="link">
-                        <a href="#">About</a>
-                        <a href="#">Newsroom</a>
-                        <a href="#">Contact</a>
-                        <a href="#">Careers</a>
-                        <a href="#">ByteDance</a>
-                        <a href="#">About</a>
-                        <a href="#">Newsroom</a>
-                        <a href="#">Contact</a>
-                        <a href="#">Careers</a>
-                        <a href="#">ByteDance</a>
-                    </div>
-                    <div class="copyright">
-                        <h6>&copy; 2023 Abato tuyige</h6>
-                    </div>
+            <div class="user">
+                <a href="features" class="username">Physical Features</a>
+            </div>
+        </div>
+        <div class="tags">
+            <p>Discover</p>
+            <div>
+                <a href="#"># childrensbook</a>
+                <a href="#"># summeressentials</a>
+                <a href="#"># child'smusic</a>
+                <a href="#"># child hoodmemories</a>
+                <a href="#"># whoisbetter</a>
+                <a href="#"># uganimations</a>
+                <a href="#"># summeressentials</a>
+                <a href="#"># music</a>
+                <a href="#"># memories</a>
+                <a href="#"># whoisbetter</a>
+            </div>
+        </div>
+        <div class="links">
+            <div>
+                <div class="link">
+                    <a href="#">About</a>
+                    <a href="#">Newsroom</a>
+                    <a href="#">Contact</a>
+                    <a href="#">Careers</a>
+                    <a href="#">ByteDance</a>
+                    <a href="#">About</a>
+                    <a href="#">Newsroom</a>
+                    <a href="#">Contact</a>
+                    <a href="#">Careers</a>
+                    <a href="#">ByteDance</a>
+                </div>
+                <div class="copyright">
+                    <h6>&copy; 2023 Abato tuyige</h6>
                 </div>
             </div>
         </div>
+    </div>
 
         <div class="right">
            
-            <div class="files" >
-                <div class="video" style="display: grid;grid-template-columns: repeat(1,1fr); grid-gap:20px;text-align: center;padding: 20px;">
-                    <% if(video.length>0) {%>
-                      <% video.forEach(video => { %>
-                    <div class="card">
-                    <p><%= video._id %></p>
-                      <video controls class="video-player">
-                          <source src="<%= video.video %>" type="video/mp4">
-                          Your browser does not support the video tag.
-                      </video>
-                      <div class="des">
-                        <small style="color:black"><%= video.description%></small>
-                      </div>
-                     
-                    </div>
-                 
-              
-                    <% }) %>
-                    <% } else { %>
-                      <p>No data available.</p>
-                      <% } %>
-                    </div>
-                <div class="image"  style="display: grid;grid-template-columns: repeat(1,1fr); grid-gap:20px;text-align: center;max-height: 400px ;padding: 20px;">
+            <div class="others" >
+                <div class="image"  style="display: flex; flex-wrap: wrap;">
                   <% if (image.length > 0) { %>
                     <% image.forEach(item => { %>
                         <div class="card">

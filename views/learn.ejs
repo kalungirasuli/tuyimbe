@@ -220,10 +220,10 @@
           box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
           padding: 20px;
           margin-bottom: 20px;
+          max-width: 300px;
       }
       .card-image {
           width: 100%;
-          max-width: 400px;
           height: auto;
           margin-bottom: 10px;
       }
@@ -349,8 +349,8 @@
                         <small style="color:black"><%= item.description %></small>
                         <form action="/comment" method="POST">
                             <textarea class="comment-input" name="comment" rows="4" placeholder="Enter your comment" required></textarea>
-                            <input type="text"  name="id" disabled style="display: none;" value="<%=item._id %>">
-                            <button type="submit" class="submit-btn">Submit</button>
+                            <input type="text"  name="id"  value="<%=item._id %>">
+                            <button type="submit" style="" class="submit-btn">Submit</button>
                         </form>
                     </div>
                 <% }); %>

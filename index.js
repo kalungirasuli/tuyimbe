@@ -24,7 +24,9 @@ app.use('/',Login)
 app.use('/',Admin)
 app.use('/',index)
 app.use('/',comment)
-mongoose.connect("mongodb://localhost:27017", {//use database.connect
+
+//mongodb://localhost:27017
+mongoose.connect("mongodb+srv://kalungirasuli495:Kalungi2002@cluster0.i00y4ap.mongodb.net/", {//use database.connect
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

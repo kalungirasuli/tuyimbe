@@ -141,27 +141,20 @@
     <main>
         <div class="left">
             <div class="btns">
-                <a href="/index"><i class="fas fa-home"></i> <span>VIDEOS</span></a>
                 <a href="/learn"><i class="fas fa-user-friends"></i> <span>Learn</span></a>
-                <a href="/login"><i class="fas fa-user-friends"></i> <span>Login</span></a>
-                <a href="/signup"><i class="fas fa-user-friends"></i> <span>signup</span></a>
                 <a href="/Adminsignup">Admin</a>
               </div>
-          
             <div class="accounts">
                 <p>Suggested topics</p>
                 
                 <div class="user">
-                    <img src="./assets/Frankenstein.png" alt="avatar">
-                    <a href="domestic" class="username">Domestic Animals</a>
+                    <a href="/domestic" class="username">Domestic Animals</a>
                 </div>
                 <div class="user">
-                    <img src="./assets/Pirate.png" alt="avatar">
-                    <a href="bodyparts" class="username">Body Parts</a>
+                    <a href="/bodyparts" class="username">Body Parts</a>
                 </div>
                 <div class="user">
-                    <img src="./assets/Gypsy.png" alt="avatar">
-                    <a href="/features" class="username">Physical features</a>
+                    <a href="features" class="username">Physical Features</a>
                 </div>
             </div>
             <div class="tags">
@@ -202,29 +195,8 @@
 
         <div class="right">
            
-            <div class="files" >
-                <div class="video" style="display: grid;grid-template-columns: repeat(1,1fr); grid-gap:20px;text-align: center;padding: 20px;">
-                    <% if(video.length>0) {%>
-                      <% video.forEach(video => { %>
-                    <div class="card">
-                    <p><%= video._id %></p>
-                      <video controls class="video-player">
-                          <source src="<%= video.video %>" type="video/mp4">
-                          Your browser does not support the video tag.
-                      </video>
-                      <div class="des">
-                        <small style="color:black"><%= video.description%></small>
-                      </div>
-                     
-                    </div>
-                 
-              
-                    <% }) %>
-                    <% } else { %>
-                      <p>No data available.</p>
-                      <% } %>
-                    </div>
-                <div class="image"  style="display: grid;grid-template-columns: repeat(1,1fr); grid-gap:20px;text-align: center;max-height: 400px ;padding: 20px;">
+            <div class="others" >
+                <div class="image"  style="display: flex; flex-wrap: wrap;">
                   <% if (image.length > 0) { %>
                     <% image.forEach(item => { %>
                         <div class="card">

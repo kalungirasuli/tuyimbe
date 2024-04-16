@@ -6,13 +6,16 @@ const Images=require('../models/images')
 const Video=require('../models/videoShema')
 router.get('/',async(req,res)=>{
     try{
-        const image=await Images.find()
+        const image=await Images.find({category:"myrymes"})
         const video=await Video.find()
         res.render('index',{image,video})
     }catch(err){
+        console.log(err)
         res.send('internal server error')
     }
 })
 router.get('/learn',auth,controller.get)
-
-module.exports=router
+router.get('/domestic',controller.dom)
+router.get('/bodyparts',auth,controller.body)
+router.get('/features',controller.feature)
+module.exports=router 

@@ -9,9 +9,20 @@
     <form action="/images" method="post" enctype="multipart/form-data" style="background-color:whitesmoke; width:50%;margin:auto;border-radius: 10px;display: flex;flex-direction: column;gap: 20px;">
         <h1 style="color:blue;font-size: 30px; text-align: center;">Upload image and audio</h1>
         <div style="width:80%;height:55px; margin:auto;display: flex; flex-direction: column;">
+            <label for="category" style="padding: 5px;font-size: 17px;">Category</label>
+            <select type="file" name="category" id="category" style="padding:5px; font-size: 17px;" placeholder="select image please">
+                <option value="domestic">Domestic animal</option>
+                <option value="myrymes">Rymes</option>
+                <option value="bodyparts">BodyParts</option>
+                <option value="features">Physical Features</option>
+            </select>
+        </div>
+        
+        <div style="width:80%;height:55px; margin:auto;display: flex; flex-direction: column;">
             <label for="email" style="padding: 5px;font-size: 17px;">image</label>
             <input type="file" name="image" id="email" style="padding:5px; font-size: 17px;" placeholder="select image please">
         </div>
+        
         <div style="width:80%;height:55px;margin:auto; display: flex; flex-direction: column;">
             <label for="fullname" style="padding: 5px;font-size: 17px;">Audio</label>
             <input type="file" name="audio" id="audio" style="padding:5px; font-size: 17px;" placeholder="select audio please">

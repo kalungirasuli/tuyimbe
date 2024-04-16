@@ -10,18 +10,17 @@ module.exports = {
   ( async(req, res) => {
  
     try {
-      const description = req.body.description;
+      const rest = req.body;
       const audiopaths = req.files['audio'].map(file => file.path);
       const imagepaths = req.files['image'].map(file => file.path);
       const imagedata= imagepaths.map(image=>`${image}`).toString()
       const audiodata= audiopaths.map(audio=>`${audio}`).toString()
       const pathimage=`/`+ imagedata.split(`\\`)[1]
       const pathaudio=`/`+ audiodata.split(`\\`)[1]
-      console.log(pathaudio)
       const data = {
         image: pathimage,
         audio: pathaudio,
-        description: description,
+        ...rest
       };
       const uploading= await  Upload(data);
       await uploading.save();
@@ -47,19 +46,17 @@ module.exports = {
   
   put: async (req, res) => {
     try {
-      const description = req.body.description;
+      const rest = req.body;
       const audiopaths = req.files['audio'].map(file => file.path);
       const imagepaths = req.files['image'].map(file => file.path);
       const imagedata= imagepaths.map(image=>`${image}`).toString()
       const audiodata= audiopaths.map(audio=>`${audio}`).toString()
       const pathimage=`/`+ imagedata.split(`\\`)[1]
       const pathaudio=`/`+ audiodata.split(`\\`)[1]
-      console.log(description)
-      console.log(pathaudio)
       const data = {
         image: pathimage,
         audio: pathaudio,
-        description: description,
+        ...rest
       };
       console.log(data);
       console.log(data)

@@ -8,6 +8,7 @@ module.exports = {
     try{
         const fields=req.body
         const userHeaders=req.headers
+        console.log(userHeaders.ip)
         if(!userHeaders) return res.status(400).json({message:"unauthorized token or token expired"})
         if(!fields.email || !fields.password){
             return res.status(400).json({
