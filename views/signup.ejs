@@ -3,27 +3,464 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sign Up - ABATO TUYIGE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ef7805;
+            --secondary: #00b44b;
+            --neutral: #bba89c;
+            --accent: #9eafa2;
+            --background: #f5f7fa;
+            --text: #2d2d2d;
+            --border: #bba89c;
+            --font-heading: 'Space Grotesk', sans-serif;
+            --font-body: 'Poppins', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--background);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            color: var(--text);
+        }
+
+        .signup-container {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 1000px;
+            padding: 2.5rem;
+            animation: slideUp 0.5s ease-out;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .signup-intro {
+            padding-right: 2rem;
+        }
+
+        .signup-title {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .signup-description {
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .signup-form-section {
+            background: #1a1a1a;
+            padding: 2.5rem;
+            border-radius: 16px;
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .signup-form-section::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(
+                45deg,
+                rgba(235, 233, 233, 0.7),
+                rgba(128, 128, 128, 0.2)
+            );
+            border-radius: 20px;
+            z-index: -1;
+        }
+
+        .signup-form-section::after {
+            content: '';
+            position: absolute;
+            top: -9px;
+            left: -9px;
+            right: -9px;
+            bottom: -9px;
+            background: #1a1a1a;
+            border-radius: 19px;
+            z-index: -1;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            font-family: var(--font-body);
+            display: block;
+            margin-bottom: 0.75rem;
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            background: #2d2d2d;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.2s;
+            color: white;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
+            background: #333333;
+        }
+
+        .form-input::placeholder {
+            color: #888888;
+        }
+
+        .btn {
+            font-family: var(--font-heading);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(45deg, var(--primary), #ff9f00);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.5s;
+        }
+
+        .btn:hover::before {
+            transform: translateX(100%);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 2rem;
+            color: #888888;
+        }
+
+        .login-link a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .social-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #e0e0e0;
+            background: white;
+            color: #333;
+        }
+
+        .social-btn img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .social-btn.google {
+            border-color: #4285f4;
+        }
+
+        .social-btn.x {
+            border-color: #000;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 2rem 0;
+            color: #666;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            border-top: 1px solid var(--border);
+        }
+
+        .divider span {
+            padding: 0 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .signup-container {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+                padding: 2rem;
+            }
+
+            .signup-intro {
+                padding-right: 0;
+                text-align: center;
+            }
+
+            .signup-title {
+                font-size: 2.5rem;
+            }
+
+            .signup-form-section {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .social-buttons {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+        }
+
+        .form-title {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .popup-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, var(--secondary), #00c853);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(0, 180, 75, 0.2);
+            transform: translateX(200%);
+            transition: transform 0.3s ease-out;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .popup-notification.show {
+            transform: translateX(0);
+        }
+
+        .popup-notification i {
+            font-size: 1.25rem;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transform: translateX(200%);
+            transition: transform 0.3s ease-out;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .notification.success {
+            background: linear-gradient(45deg, var(--secondary), #00c853);
+            color: white;
+        }
+
+        .notification.error {
+            background: linear-gradient(45deg, #f44336, #d32f2f);
+            color: white;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+    </style>
 </head>
 <body>
-    <form action="/signup" method="post" style="background-color:whitesmoke; width:50%;margin:auto;border-radius: 10px;display: flex;flex-direction: column;gap: 20px;">
-        <h1 style="color:blue;font-size: 30px; text-align: center;">Fill the form below to signup</h1>
-        <div style="width:80%;height:55px; margin:auto;display: flex; flex-direction: column;">
-            <label for="email" style="padding: 5px;font-size: 17px;">Email</label>
-            <input type="text" name="email" id="email" style="padding:5px; font-size: 17px;" placeholder="Enter email please">
+    <div class="signup-container">
+        <div class="signup-intro">
+            <h1 class="signup-title">Join Abato Tuyige</h1>
+            <p class="signup-description">Start your learning journey today with our educational resources and interactive content.</p>
+            <div class="social-buttons">
+                <button class="social-btn google">
+                    <img src="/google-logo.svg" alt="Google">
+                    Sign up with Google
+                </button>
+                <button class="social-btn x">
+                    <img src="/x-logo.svg" alt="X">
+                    Sign up with X
+                </button>
+            </div>
         </div>
-        <div style="width:80%;height:55px;margin:auto; display: flex; flex-direction: column;">
-            <label for="fullname" style="padding: 5px;font-size: 17px;">FullName</label>
-            <input type="text" name="fullName" id="fullname" style="padding:5px; font-size: 17px;" placeholder="Enter password please">
+
+        <div class="signup-form-section">
+            <h1 class="form-title">Create Your Account</h1>
+            <form action="/signup" method="post">
+                <div class="form-group">
+                    <label class="form-label" for="email">Email</label>
+                    <input class="form-input" type="email" id="email" name="email" required placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="fullname">Full Name</label>
+                    <input class="form-input" type="text" id="fullname" name="fullName" required placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="password">Password</label>
+                    <input class="form-input" type="password" id="password" name="password" required placeholder="Choose a password">
+                </div>
+                <button type="submit" class="btn">Sign Up</button>
+            </form>
+            <div class="login-link">
+                <p>Already have an account? <a href="/login">Log in</a></p>
+            </div>
         </div>
-        <div style="width:80%;height:55px;margin:auto; display: flex; flex-direction: column;">
-            <label for="password" style="padding: 5px;font-size: 17px;">Password</label>
-            <input type="text" name="password" id="password" style="padding:5px; font-size: 17px;" placeholder="Enter password please">
-        </div>
-       
-        <div style="align-items: center; margin:auto;width: 100px; padding: 20px;">
-            <button type="submit" style="height:50px;padding:10px;background-color: blue;width:100px;border-radius: 10px; border: white 2px solid; color:white;font-size: 20px;">Signup</button>
-        </div>
-    </form>
+    </div>
+
+    <div class="popup-notification">
+        <i class="fas fa-check-circle"></i>
+        <span>Successfully signed up! Redirecting...</span>
+    </div>
+
+    <div class="notification success">
+        <i class="fas fa-check-circle"></i>
+        <span>Successfully signed up! Redirecting...</span>
+    </div>
+    <div class="notification error" style="display: none;">
+        <i class="fas fa-exclamation-circle"></i>
+        <span></span>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.querySelector('form');
+            const successNotification = document.querySelector('.notification.success');
+            const errorNotification = document.querySelector('.notification.error');
+
+            function showNotification(element, message) {
+                element.querySelector('span').textContent = message;
+                element.style.display = 'flex';
+                element.classList.add('show');
+                setTimeout(() => {
+                    element.classList.remove('show');
+                    setTimeout(() => {
+                        element.style.display = 'none';
+                    }, 300);
+                }, 3000);
+            }
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                try {
+                    const response = await fetch('/signup', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            email: form.email.value,
+                            fullName: form.fullName.value,
+                            password: form.password.value
+                        })
+                    });
+
+                    if (response.status === 200) {
+                        showNotification(successNotification, 'Successfully signed up! Redirecting...');
+                        setTimeout(() => {
+                            window.location.href = '/login';
+                        }, 3000);
+                    } else if (response.status === 409) {
+                        showNotification(errorNotification, 'Email already exists. Please use a different email.');
+                    } else if (response.status >= 500) {
+                        showNotification(errorNotification, 'Server error. Please try again later.');
+                    } else {
+                        showNotification(errorNotification, 'Signup failed. Please check your information and try again.');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    showNotification(errorNotification, 'Connection error. Please check your internet connection.');
+                }
+            });
+        });
+    </script>
 </body>
 </html>

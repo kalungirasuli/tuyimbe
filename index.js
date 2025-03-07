@@ -15,6 +15,7 @@ const dotenv=require('dotenv')
 
 dotenv.config()
 app.set("view engine", 'ejs');
+app.set('views', path.join(__dirname, 'views')); // Add this line
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -26,7 +27,7 @@ app.use('/',index)
 app.use('/',comment)
 
 //mongodb://localhost:27017
-mongoose.connect("mongodb+srv://kalungirasuli495:Kalungi2002@cluster0.i00y4ap.mongodb.net/", {//use database.connect
+mongoose.connect("mongodb://localhost:27017/", {//use database.connect
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
