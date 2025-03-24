@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ABATO TUYIGE | Forum</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <style>
+    :root {
+      --primary: #FF5A5F;
+      --secondary: #FF8C00;
+      --dark: #2C3E50;
+      --light: #F8F9FA;
+      --gray: #F0F2F5;
+      --text: #484848;
+      --shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      --radius: 12px;
+      --transition: all 0.3s ease;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: var(--light);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* Header Styles */
+    header {
+      background-color: white;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+    }
+    
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .logo i {
+      color: var(--secondary);
+    }
+    
+    .nav-menu {
+      display: flex;
+      gap: 30px;
+    }
+    
+    .nav-link {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .nav-link:hover {
+      color: var(--primary);
+    }
+    
+    .nav-link.active {
+      color: var(--primary);
+      font-weight: 600;
+    }
+    
+    .user-actions {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .btn {
+      padding: 10px 20px;
+      border-radius: var(--radius);
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background-color: #ff3b40;
+    }
+    
+    .btn-outline {
+      background-color: transparent;
+      color: var(--text);
+      border: 1px solid var(--text);
+    }
+    
+    .btn-outline:hover {
+      background-color: var(--gray);
+    }
+    
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #000000 0%, #FF8C00 100%);
+      padding: 60px 0;
+      color: white;
+      border-radius: 0 0 var(--radius) var(--radius);
+      margin-bottom: 40px;
+    }
+    
+    .hero-content {
+      max-width: 600px;
+    }
+    
+    .hero h1 {
+      font-size: 42px;
+      margin-bottom: 15px;
+    }
+    
+    .hero p {
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+    
+    .search-container {
+      background-color: white;
+      padding: 5px;
+      border-radius: var(--radius);
+      display: flex;
+      box-shadow: var(--shadow);
+    }
+    
+    .search-input {
+      flex: 1;
+      padding: 12px 15px;
+      border: none;
+      font-size: 16px;
+      outline: none;
+      border-radius: var(--radius);
+    }
+    
+    /* Category Pills */
+    .category-pills {
+      display: flex;
+      gap: 10px;
+      margin: 30px 0;
+      flex-wrap: wrap;
+    }
+    
+    .category-pill {
+      background-color: white;
+      color: var(--text);
+      padding: 8px 15px;
+      border-radius: 30px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 1px solid var(--gray);
+    }
+    
+    .category-pill:hover, .category-pill.active {
+      background-color: var(--secondary);
+      color: white;
+      border-color: var(--secondary);
+    }
+    
+    /* Main Content */
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+    
+    /* Sidebar */
+    .sidebar {
+      background-color: white;
+      border-radius: var(--radius);
+      padding: 25px;
+      box-shadow: var(--shadow);
+      height: fit-content;
+      position: sticky;
+      top: 100px;
+    }
+    
+    .sidebar-section {
+      margin-bottom: 30px;
+    }
+    
+    .sidebar-section:last-child {
+      margin-bottom: 0;
+    }
+    
+    .sidebar-title {
+      font-size: 18px;
+      margin-bottom: 15px;
+      color: var(--dark);
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .sidebar-title::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 40px;
+      height: 3px;
+      background-color: var(--secondary);
+      border-radius: 3px;
+    }
+    
+    .topic-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .topic-item {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border-radius: var(--radius);
+      background-color: var(--gray);
+      transition: var(--transition);
+      text-decoration: none;
+      color: var(--text);
+    }
+    
+    .topic-item:hover {
+      background-color: var(--secondary);
+      color: white;
+      transform: translateY(-2px);
+    }
+    
+    .topic-icon {
+      width: 40px;
+      height: 40px;
+      background-color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 12px;
+      color: var(--secondary);
+    }
+    
+    .topic-item:hover .topic-icon {
+      color: var(--secondary);
+    }
+    
+    /* Forum Specific Styles */
+    .forum-container {
+      background-color: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    
+    .forum-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      border-bottom: 1px solid var(--gray);
+    }
+    
+    .forum-filters {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+    
+    .forum-filter {
+      padding: 8px 15px;
+      border-radius: var(--radius);
+      border: 1px solid var(--gray);
+      background-color: white;
+      color: var(--text);
+      font-size: 14px;
+      cursor: pointer;
+    }
+    
+    .forum-title {
+      font-size: 22px;
+      color: var(--dark);
+    }
+    
+    .create-thread-btn {
+      background-color: var(--secondary);
+      color: white;
+      padding: 10px 20px;
+      border-radius: var(--radius);
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+    }
+    
+    .create-thread-btn:hover {
+      background-color: #e67e00;
+      transform: translateY(-2px);
+    }
+    
+    .thread-list {
+      list-style: none;
+    }
+    
+    .thread-item {
+      padding: 20px;
+      border-bottom: 1px solid var(--gray);
+      transition: var(--transition);
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    
+    .thread-item:hover {
+      background-color: var(--light);
+    }
+    
+    .thread-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background-color: var(--gray);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--dark);
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+    
+    .thread-content {
+      flex: 1;
+    }
+    
+    .thread-title {
+      font-size: 18px;
+      margin-bottom: 8px;
+      color: var(--dark);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .thread-title:hover {
+      color: var(--secondary);
+    }
+    
+    .thread-preview {
+      font-size: 14px;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    
+    .thread-meta {
+      display: flex;
+      gap: 15px;
+      font-size: 13px;
+      color: #777;
+    }
+    
+    .thread-meta span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .thread-status {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-width: 80px;
+      text-align: center;
+    }
+    
+    .status-count {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--dark);
+    }
+    
+    .status-label {
+      font-size: 12px;
+      color: #777;
+    }
+    
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding: 20px;
+      border-top: 1px solid var(--gray);
+    }
+    
+    .page-btn {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      border: 1px solid var(--gray);
+      background-color: white;
+      color: var(--text);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .page-btn:hover, .page-btn.active {
+      background-color: var(--secondary);
+      color: white;
+      border-color: var(--secondary);
+    }
+    
+    /* Modal styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+    
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .modal {
+      background-color: white;
+      width: 100%;
+      max-width: 700px;
+      border-radius: var(--radius);
+      padding: 25px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+      transform: translateY(-20px);
+      transition: var(--transition);
+    }
+    
+    .modal-overlay.active .modal {
+      transform: translateY(0);
+    }
+    
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .modal-title {
+      font-size: 20px;
+      color: var(--dark);
+    }
+    
+    .close-modal {
+      background: none;
+      border: none;
+      font-size: 20px;
+      color: #777;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .close-modal:hover {
+      color: var(--primary);
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--dark);
+      font-weight: 500;
+    }
+    
+    .form-input {
+      width: 100%;
+      padding: 12px;
+      border-radius: var(--radius);
+      border: 1px solid var(--gray);
+      font-size: 16px;
+    }
+    
+    .form-textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: var(--radius);
+      border: 1px solid var(--gray);
+      font-size: 16px;
+      min-height: 150px;
+      resize: vertical;
+    }
+    
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    /* Thread view styles */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+    
+    .breadcrumb a {
+      color: var(--text);
+      text-decoration: none;
+    }
+    
+    .breadcrumb a:hover {
+      color: var(--secondary);
+    }
+    
+    .breadcrumb i {
+      font-size: 12px;
+      color: #777;
+    }
+    
+    .thread-view-header {
+      background-color: white;
+      border-radius: var(--radius) var(--radius) 0 0;
+      padding: 20px;
+      box-shadow: var(--shadow);
+      margin-bottom: 1px;
+    }
+    
+    .thread-topic {
+      display: inline-block;
+      background-color: var(--gray);
+      padding: 4px 10px;
+      border-radius: 30px;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+    
+    .post {
+      background-color: white;
+      padding: 20px;
+      margin-bottom: 1px;
+      display: flex;
+      gap: 20px;
+    }
+    
+    .post:last-child {
+      border-radius: 0 0 var(--radius) var(--radius);
+    }
+    
+    .post-sidebar {
+      width: 120px;
+      flex-shrink: 0;
+      text-align: center;
+    }
+    
+    .post-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background-color: var(--gray);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--dark);
+      font-weight: bold;
+      margin: 0 auto 10px;
+    }
+    
+    .post-username {
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: var(--dark);
+    }
+    
+    .post-role {
+      display: inline-block;
+      background-color: var(--secondary);
+      color: white;
+      padding: 2px 8px;
+      border-radius: 30px;
+      font-size: 11px;
+      margin-bottom: 10px;
+    }
+    
+    .post-stats {
+      font-size: 12px;
+      color: #777;
+    }
+    
+    .post-content {
+      flex: 1;
+    }
+    
+    .post-text {
+      margin-bottom: 20px;
+    }
+    
+    .post-actions {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .post-action {
+      background: none;
+      border: none;
+      color: #777;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 13px;
+      transition: var(--transition);
+    }
+    
+    .post-action:hover {
+      color: var(--secondary);
+    }
+    
+    .reply-form {
+      background-color: white;
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-top: 30px;
+      box-shadow: var(--shadow);
+    }
+    
+    .reply-title {
+      margin-bottom: 15px;
+      color: var(--dark);
+    }
+    
+    /* Footer */
+    footer {
+      background-color: white;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+      padding: 40px 0;
+      margin-top: 60px;
+    }
+    
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+    }
+    
+    .footer-column h4 {
+      font-size: 18px;
+      margin-bottom: 20px;
+      color: var(--dark);
+    }
+    
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .footer-link {
+      text-decoration: none;
+      color: var(--text);
+      transition: var(--transition);
+    }
+    
+    .footer-link:hover {
+      color: var(--secondary);
+    }
+    
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid var(--gray);
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .social-link {
+      color: var(--text);
+      font-size: 18px;
+      transition: var(--transition);
+    }
+    
+    .social-link:hover {
+      color: var(--secondary);
+    }
+    
+    /* Thread view state */
+    .thread-view-container {
+      display: none;
+    }
+    
+    .forum-view-container.hidden {
+      display: none;
+    }
+    
+    .thread-view-container.active {
+      display: block;
+    }
+    
+    @media (max-width: 992px) {
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .sidebar {
+        position: static;
+      }
+      
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .post {
+        flex-direction: column;
+      }
+      
+      .post-sidebar {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 15px;
+        text-align: left;
+      }
+      
+      .post-avatar {
+        margin: 0;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .nav-menu {
+        width: 100%;
+        justify-content: space-around;
+      }
+      
+      .hero h1 {
+        font-size: 32px;
+      }
+      
+      .forum-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+      }
+      
+      .thread-meta {
+        flex-wrap: wrap;
+      }
+      
+      .thread-item {
+        flex-wrap: wrap;
+      }
+      
+      .thread-status {
+        width: 100%;
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 15px;
+        margin-top: 10px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-bottom {
+        flex-direction: column;
+        gap: 20px;
+      }
+      
+      .thread-item {
+        padding: 15px;
+      }
+      
+      .post {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <nav class="navbar">
+        <a href="/" class="logo">
+          <i class="fas fa-music"></i>
+          ABATO TUYIGE
+        </a>
+        
+        <div class="nav-menu">
+          <a href="/videos" class="nav-link">
+            <i class="fas fa-video"></i> Videos
+          </a>
+          <a href="/learn" class="nav-link">
+            <i class="fas fa-graduation-cap"></i> Learn
+          </a>
+          <a href="/discover" class="nav-link">
+            <i class="fas fa-compass"></i> Discover
+          </a>
+          <a href="/forum" class="nav-link active">
+            <i class="fas fa-comments"></i> Forum
+          </a>
+        </div>
+        
+        <div class="user-actions">
+          <button class="btn btn-outline" id="login-btn">
+            <i class="fas fa-sign-in-alt"></i> Login
+          </button>
+          <button class="btn btn-primary" id="signup-btn">
+            <i class="fas fa-user-plus"></i> Sign Up
+          </button>
+        </div>
+      </nav>
+    </div>
+  </header>
+  
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Join Our Community Forum</h1>
+        <p>Connect with parents, educators, and others interested in children's learning. Share experiences, ask questions, and discover educational resources.</p>
+        <div class="search-container">
+          <input type="text" class="search-input" placeholder="Search discussions, topics, or keywords...">
+          <button class="btn btn-primary">
+            <i class="fas fa-search"></i> Search
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <main class="container">
+    <div class="category-pills">
+      <div class="category-pill active">All Discussions</div>
+      <div class="category-pill">Parenting Tips</div>
+      <div class="category-pill">Learning Activities</div>
+      <div class="category-pill">Teaching Resources</div>
+      <div class="category-pill">Content Requests</div>
+      <div class="category-pill">Development Milestones</div>
+    </div>
+    
+    <div class="content-grid">
+      <aside class="sidebar">
+        <div class="sidebar-section">
+          <h3 class="sidebar-title">Forum Stats</h3>
+          <div class="topic-list">
+            <div class="topic-item">
+              <div class="topic-icon">
+                <i class="fas fa-users"></i>
+              </div>
+              <span>1,245 Members</span>
+            </div>
+            <div class="topic-item">
+              <div class="topic-icon">
+                <i class="fas fa-comment-dots"></i>
+              </div>
+              <span>325 Topics</span>
+            </div>
+            <div class="topic-item">
+              <div class="topic-icon">
+                <i class="fas fa-reply"></i>
+              </div>
+              <span>2,789 Replies</span>
+            </div>
+            <div class="topic-item">
+              <div class="topic-icon">
+                <i class="fas fa-user-plus"></i>
+              </div>
+              <span>12 New Members Today</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="sidebar-section">
+          <h3 class="sidebar-title">Popular Topics</h3>
+          <div class="topic-list">
+            <a href="#" class="topic-item" data-topic="counting">
+              <div class="topic-icon">
+                <i class="fas fa-sort-numeric-up"></i>
+              </div>
+              <span>Learning Numbers</span>
+            </a>
+            <a href="#" class="topic-item" data-topic="alphabet">
+              <div class="topic-icon">
+                <i class="fas fa-font"></i>
+              </div>
+              <span>Literacy & Reading</span>
+            </a>
+            <a href="#" class="topic-item" data-topic="music">
+              <div class="topic-icon">
+                <i class="fas fa-music"></i>
+              </div>
+              <span>Music & Development</span>
+            </a>
+            <a href="#" class="topic-item" data-topic="special-needs">
+              <div class="topic-icon">
+                <i class="fas fa-heart"></i>
+              </div>
+              <span>Special Needs Resources</span>
+            </a>
+          </div>
+        </div>
+        
+        <div class="sidebar-section">
+          <h3 class="sidebar-title">Active Members</h3>
+          <div class="topic-list">
+            <div class="topic-item">
+              <div class="topic-icon">
+                <i class="fas fa-user"></i>
+              </div>
+              <span>TeacherSarah</span>
+            </div>
+            <div class="topic-item">
+              <div class="topic-icon">
+                <i class="fas fa-user"></i>
+              </div>
+              <span>ParentCoach42</span>
+            </div>
+            <div class="topic-item">
+              <div class="topic-icon">
+                <i class="fas fa-user"></i>
+              </div>
+              <span>EarlyLearningPro</span>
+            </div>
+            <div class="topic-item">
+              <div class="topic-icon">
+                <i class="fas fa-user"></i>
+              </div>
+              <span>MusicTherapist</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+      
+      <!-- Forum View -->
+      <div class="forum-view-container">
+        <div class="forum-container">
+          <div class="forum-header">
+            <h2 class="forum-title">Recent Discussions</h2>
+            
+            <div class="forum-filters">
+              <select class="forum-filter">
+                <option value="latest">Latest</option>
+                <option value="popular">Most Popular</option>
+                <option value="unanswered">Unanswered</option>
+                <option value="solved">Solved</option>
+              </select>
+              
+              <button class="create-thread-btn" id="create-thread-btn">
+                <i class="fas fa-plus"></i> New Discussion
+              </button>
+            </div>
+          </div>
+          
+          <ul class="thread-list" id="thread-list">
+            <!-- Thread items will be dynamically populated -->
+          </ul>
+          
+          <div class="pagination">
+            <button class="page-btn"><i class="fas fa-chevron-left"></i></button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Thread View (Hidden by default) -->
+      <div class="thread-view-container">
+        <div class="breadcrumb">
+          <a href="#" id="back-to-forum">Forum</a>
+          <i class="fas fa-chevron-right"></i>
+          <span id="current-category">Parenting Tips</span>
+          <i class="fas fa-chevron-right"></i>
+          <span id="current-thread">Best songs for toddler development</span>
+        </div>
+        
+        <div class="thread-view-header">
+          <div class="thread-topic" id="thread-view-category">Music & Development</div>
+          <h2 class="forum-title" id="thread-view-title">Best songs for toddler development</h2>
+          <div class="thread-meta" id="thread-view-meta">
+            <span><i class="fas fa-user"></i> Started by <strong>MusicTherapist</strong></span>
+            <span><i class="fas fa-calendar"></i> March 20, 2025</span>
+            <span><i class="fas fa-eye"></i> 346 views</span>
+          </div>
+        </div>
+        
+        <div id="thread-posts">
+          <!-- Posts will be dynamically populated -->
+        </div>
+        
+        <div class="reply-form">
+          <h3 class="reply-title">Post a Reply</h3>
+          <div class="form-group">
+            <textarea class="form-textarea" id="reply-content" placeholder="Write your reply here..."></textarea>
+          </div>
+          <button class="btn btn-primary" id="post-reply-btn">Post Reply</button>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Sample thread data
+        const threads = [
+          {
+            id: 1,
+            title: "Best songs for toddler development",
+            category: "Music & Development",
+            author: "MusicTherapist",
+            avatar: "MT",
+            preview: "I'm looking for recommendations on age-appropriate songs that support language development for my 2-year-old. Which songs have worked well for your children?",
+            date: "March 20, 2025",
+            replies: 12,
+            views: 346,
+            lastReply: "March 22, 2025",
+            lastReplyAuthor: "EarlyLearningPro",
+            solved: true,
+            posts: [
+              {
+                author: "MusicTherapist",
+                avatar: "MT",
+                role: "Music Educator",
+                joinDate: "January 2024",
+                posts: 87,
+                content: "Hello everyone! I'm working with several families who are looking for engaging songs that specifically support language and cognitive development for toddlers around 2 years old. Research shows music can be incredibly powerful during this developmental stage.<br><br>What songs have you found most effective? I'm especially interested in songs with:<br>- Simple, repetitive phrases<br>- Actions/movements that pair with words<br>- Counting or alphabet components<br><br>Thank you in advance for your recommendations!",
+                date: "March 20, 2025",
+                likes: 15
+              },
+              {
+                author: "ParentCoach42",
+                avatar: "PC",
+                role: "Parent Educator",
+                joinDate: "March 2023",
+                posts: 156,
+                content: "Great question! In my parenting workshops, we've had great success with:<br><br>1. \"Head, Shoulders, Knees and Toes\" - fantastic for body awareness and following directions<br>2. \"If You're Happy and You Know It\" - helps with emotional recognition and following multi-step instructions<br>3. \"Five Little Monkeys\" - introduces counting and sequencing<br><br>I also recommend incorporating songs in different languages if that's relevant to your families. Even simple songs like \"Frère Jacques\" can be wonderful for phonological awareness.",
+                date: "March 20, 2025",
+                likes: 8
+              },
+              {
+                author: "EarlyLearningPro",
+                avatar: "EL",
+                role: "Early Childhood Specialist",
+                joinDate: "August 2022",
+                posts: 423,
+                content: "I'd add to the excellent suggestions above with a few more:<br><br>- \"The Wheels on the Bus\" is perfect for this age - it has repetition, actions, and sound effects that toddlers love<br>- \"Old MacDonald Had a Farm\" helps with animal sounds which are often some of the first sound combinations toddlers master<br>- \"The ABC Song\" sung slowly with emphasis on letter sounds<br><br>What's working really well in our preschool is creating personalized songs with the children's names. For example: \"Where is [child's name], where is [child's name]? There you are, there you are!\" sung to the tune of Frère Jacques.<br><br>Also, don't underestimate fingerplays like \"The Itsy Bitsy Spider\" - they're wonderful for fine motor development along with language!",
+                date: "March 22, 2025",
+                likes: 12
+              }
+            ]
+          },
+          {
+            id: 2,
+            title: "Screen time guidelines for preschoolers",
+            category: "Parenting Tips",
+            author: "ConcernedDad",
+            avatar: "CD",
+            preview: "I'm struggling with setting reasonable screen time limits for my 4-year-old. What guidelines are other parents following?",
+            date: "March 19, 2025",
+            replies: 23,
+            views: 512,
+            lastReply: "March 23, 2025",
+            lastReplyAuthor: "DigitalParenting",
+            solved: false,
+            posts: [
+              {
+                author: "ConcernedDad",
+                avatar: "CD",
+                role: "Member",
+                joinDate: "February 2025",
+                posts: 5,
+                content: "I'm struggling with setting reasonable screen time limits for my 4-year-old son. He loves educational apps and shows, but I worry about giving him too much screen time. The AAP recommends 1 hour per day, but is that really practical in today's world? What guidelines are other parents following? Any tips for transitioning away from screens without major tantrums?",
+                date: "March 19, 2025",
+                likes: 7
+              }
+            ]
+          },
+          {
+            id: 3,
+            title: "Teaching numbers through everyday activities",
+            category: "Learning Activities",
+            author: "MathMom",
+            avatar: "MM",
+            preview: "Looking for creative ways to incorporate number learning into daily routines with my 3-year-old daughter.",
+            date: "March 18, 2025",
+            replies: 18,
+            views: 387,
+            lastReply: "March 22, 2025",
+            lastReplyAuthor: "TeacherSarah",
+            solved: true,
+            posts: [
+              {
+                author: "MathMom",
+                avatar: "MM",
+                role: "Member",
+                joinDate: "November 2024",
+                posts: 32,
+                content: "Hello forum! I'm trying to find fun, natural ways to help my 3-year-old daughter learn numbers and basic counting. She's showing interest when we count things, but I want to make it a seamless part of our day rather than formal 'lessons.' Any suggestions for incorporating number learning into everyday activities?",
+                date: "March 18, 2025",
+                likes: 14
+              }
+            ]
+          },
+          {
+            id: 4,
+            title: "Supporting a child with sensory processing sensitivity",
+            category: "Special Needs Resources",
+            author: "SensoryParent",
+            avatar: "SP",
+            role: "Member",
+            preview: "Recently learned my 5-year-old has sensory processing sensitivity. Looking for resources and experiences from other parents.",
+            date: "March 21, 2025",
+            replies: 8,
+            views: 201,
+            lastReply: "March 22, 2025",
+            lastReplyAuthor: "OccupationalTherapist",
+            solved: false,
+            posts: [
+              {
+                author: "SensoryParent",
+                avatar: "SP",
+                role: "Member",
+                joinDate: "March 2025",
+                posts: 1,
+                content: "Hi everyone, I'm new here. My 5-year-old daughter was recently identified as having sensory processing sensitivity. She gets overwhelmed by loud sounds, certain food textures, and busy environments. I'm looking for resources, strategies, and especially to hear from other parents who've navigated this. What has helped your child? Are there specific tools or toys that have made a difference? Any recommendations for children's books that address sensory differences in a positive way?",
+                date: "March 21, 2025",
+                likes: 5
+              }
+            ]
+          },
+          {
+            id: 5,
+            title: "Favorite music videos for teaching alphabet",
+            category: "Literacy & Reading",
+            author: "KinderTeacher",
+            avatar: "KT",
+            preview: "Looking for engaging music videos that teach the alphabet effectively. Need recommendations beyond the basic ABC song.",
+            date: "March 15, 2025",
+            replies: 15,
+            views: 342,
+            lastReply: "March 22, 2025",
+            lastReplyAuthor: "LibrarianLiz",
+            solved: true,
+            posts: [
+              {
+                author: "KinderTeacher",
+                avatar: "KT",
+                role: "Educator",
+                joinDate: "September 2023",
+                posts: 78,
+                content: "Hello! I'm refreshing my classroom resources and looking for engaging music videos that teach the alphabet effectively. I need recommendations beyond the basic ABC song - something that shows each letter clearly, demonstrates the sound, and provides a word example. Bonus points for videos that are catchy enough that parents won't mind hearing them repeatedly! What has worked well in your classrooms or homes?",
+                date: "March 15, 2025",
+                likes: 9
+              }
+            ]
+          },
+          {
+            id: 6,
+            title: "Transitioning from crib to toddler bed",
+            category: "Parenting Tips",
+            author: "SleeplessInSeattle",
+            avatar: "SS",
+            preview: "My 2.5 year old keeps climbing out of his crib. Time for a big boy bed? Need advice on making this transition smooth.",
+            date: "March 22, 2025",
+            replies: 7,
+            views: 156,
+            lastReply: "March 23, 2025",
+            lastReplyAuthor: "SleepConsultant",
+            solved: false,
+            posts: [
+              {
+                author: "SleeplessInSeattle",
+                avatar: "SS",
+                role: "Member",
+                joinDate: "January 2024",
+                posts: 12,
+                content: "Help! My 2.5 year old has started climbing out of his crib, and I'm worried he's going to hurt himself. I think it's time for a toddler bed, but I'm dreading the transition. He's always been a good sleeper in his crib, and I'm afraid everything will fall apart with a bed he can get out of. Has anyone successfully made this transition without losing all sleep? Any tips or products that helped? Should I use a bed rail? And how do I keep him in his room if he can get out of bed?",
+                date: "March 22, 2025",
+                likes: 4
+              }
+            ]
+          },
+          {
+            id: 7,
+            title: "Cultural songs to teach diversity to young children",
+            category: "Music & Development",
+            author: "GlobalParent",
+            avatar: "GP",
+            preview: "Looking for age-appropriate songs from different cultures to introduce to my preschool classroom. Recommendations welcome!",
+            date: "March 17, 2025",
+            replies: 19,
+            views: 287,
+            lastReply: "March 22, 2025",
+            lastReplyAuthor: "MusicTherapist",
+            solved: true,
+            posts: [
+              {
+                author: "GlobalParent",
+                avatar: "GP",
+                role: "Member",
+                joinDate: "October 2023",
+                posts: 45,
+                content: "I'd like to introduce my 4-year-old twins to music from different cultures. I believe early exposure to diverse traditions helps build cultural appreciation. Can anyone recommend child-friendly songs from various countries or traditions? Ideally looking for songs that are:<br><br>- Appropriate for preschool age<br>- Relatively easy to learn/sing along<br>- Have cultural significance<br>- Available on major streaming platforms<br><br>If you know of any good compilations or artists who specialize in world music for children, I'd love to hear about those too!",
+                date: "March 17, 2025",
+                likes: 17
+              }
+            ]
+          },
+          {
+            id: 8,
+            title: "Encouraging independence in dressing for preschoolers",
+            category: "Development Milestones",
+            author: "PatientMom",
+            avatar: "PM",
+            preview: "My 3-year-old wants to dress herself but gets frustrated easily. Looking for tips to encourage independence while managing mornings.",
+            date: "March 20, 2025",
+            replies: 11,
+            views: 198,
+            lastReply: "March 23, 2025",
+            lastReplyAuthor: "EarlyChildhoodCoach",
+            solved: false,
+            posts: [
+              {
+                author: "PatientMom",
+                avatar: "PM",
+                role: "Member",
+                joinDate: "May 2024",
+                posts: 23,
+                content: "My 3-year-old daughter has recently started insisting \"I do it myself!\" when getting dressed. I love her independence, but our mornings have become so much longer and often end in tears when she can't manage buttons or gets stuck in a shirt. How can I support her desire for independence while still getting us out the door on time? Are there specific clothing features I should look for? Any games or methods that have worked for your children?",
+                date: "March 20, 2025",
+                likes: 8
+              }
+            ]
+          }
+        ];
+        
+        // Function to populate thread list
+        function populateThreadList() {
+          const threadList = document.getElementById('thread-list');
+          threadList.innerHTML = '';
+          
+          threads.forEach(thread => {
+            const threadItem = document.createElement('li');
+            threadItem.className = 'thread-item';
+            threadItem.dataset.threadId = thread.id;
+            
+            threadItem.innerHTML = `
+              <div class="thread-avatar">${thread.avatar}</div>
+              <div class="thread-content">
+                <h3 class="thread-title">${thread.title} ${thread.solved ? '<i class="fas fa-check-circle" style="color: #4CAF50;"></i>' : ''}</h3>
+                <div class="thread-preview">${thread.preview}</div>
+                <div class="thread-meta">
+                  <span><i class="fas fa-user"></i> ${thread.author}</span>
+                  <span><i class="fas fa-calendar"></i> ${thread.date}</span>
+                  <span><i class="fas fa-reply"></i> Last reply by ${thread.lastReplyAuthor}</span>
+                  <span><i class="fas fa-clock"></i> ${thread.lastReply}</span>
+                </div>
+              </div>
+              <div class="thread-status">
+                <div class="status-count">${thread.replies}</div>
+                <div class="status-label">Replies</div>
+                <div class="status-count">${thread.views}</div>
+                <div class="status-label">Views</div>
+              </div>
+            `;
+            
+            threadList.appendChild(threadItem);
+            
+            // Add click event to thread title
+            threadItem.querySelector('.thread-title').addEventListener('click', function() {
+              showThreadView(thread.id);
+            });
+          });
+        }
+        
+        // Function to show thread view
+        function showThreadView(threadId) {
+          const thread = threads.find(t => t.id === threadId);
+          if (!thread) return;
+          
+          // Update thread view content
+          document.getElementById('current-category').textContent = thread.category;
+          document.getElementById('current-thread').textContent = thread.title;
+          document.getElementById('thread-view-category').textContent = thread.category;
+          document.getElementById('thread-view-title').textContent = thread.title;
+          document.getElementById('thread-view-meta').innerHTML = `
+            <span><i class="fas fa-user"></i> Started by <strong>${thread.author}</strong></span>
+            <span><i class="fas fa-calendar"></i> ${thread.date}</span>
+            <span><i class="fas fa-eye"></i> ${thread.views} views</span>
+          `;
+          
+          // Populate posts
+          const postsContainer = document.getElementById('thread-posts');
+          postsContainer.innerHTML = '';
+          
+          thread.posts.forEach(post => {
+            const postElement = document.createElement('div');
+            postElement.className = 'post';
+            postElement.innerHTML = `
+              <div class="post-sidebar">
+                <div class="post-avatar">${post.avatar}</div>
+                <div class="post-username">${post.author}</div>
+                <div class="post-role">${post.role}</div>
+                <div class="post-stats">
+                  <div>Joined: ${post.joinDate}</div>
+                  <div>Posts: ${post.posts}</div>
+                </div>
+              </div>
+              <div class="post-content">
+                <div class="post-text">${post.content}</div>
+                <div class="post-actions">
+                  <button class="post-action"><i class="fas fa-thumbs-up"></i> Like (${post.likes})</button>
+                  <button class="post-action"><i class="fas fa-reply"></i> Quote</button>
+                  <button class="post-action"><i class="fas fa-flag"></i> Report</button>
+                </div>
+              </div>
+            `;
+            
+            postsContainer.appendChild(postElement);
+          });
+          
+          // Hide forum view, show thread view
+          document.querySelector('.forum-view-container').classList.add('hidden');
+          document.querySelector('.thread-view-container').classList.add('active');
+        }
+        
+        // Function to show forum view
+        function showForumView() {
+          document.querySelector('.forum-view-container').classList.remove('hidden');
+          document.querySelector('.thread-view-container').classList.remove('active');
+        }
+        
+        // Event listeners
+        document.getElementById('back-to-forum').addEventListener('click', function(e) {
+          e.preventDefault();
+          showForumView();
+        });
+        
+        document.getElementById('post-reply-btn').addEventListener('click', function() {
+          const replyContent = document.getElementById('reply-content').value.trim();
+          if (replyContent) {
+            alert('Your reply has been posted! (In a real application, this would save to a database)');
+            document.getElementById('reply-content').value = '';
+          } else {
+            alert('Please write a reply before posting.');
+          }
+        });
+        
+        document.getElementById('create-thread-btn').addEventListener('click', function() {
+          // In a real application, this would open the new thread modal
+          alert('New thread modal would open here. This functionality is not implemented in this demo.');
+        });
+        
+        // Populate the thread list on page load
+        populateThreadList();
+        
+        // Add click events to category pills
+        document.querySelectorAll('.category-pill').forEach(pill => {
+          pill.addEventListener('click', function() {
+            document.querySelector('.category-pill.active').classList.remove('active');
+            this.classList.add('active');
+            // In a real application, this would filter threads by category
+          });
+        });
+        
+        // Add click events to topic items
+        document.querySelectorAll('.topic-item[data-topic]').forEach(topic => {
+          topic.addEventListener('click', function(e) {
+            e.preventDefault();
+            // In a real application, this would filter threads by topic
+            alert(`Filtering by ${this.textContent.trim()} topic. This functionality is not fully implemented in this demo.`);
+          });
+        });
+      });
+  </script>
+</body>
+</html>
+
+

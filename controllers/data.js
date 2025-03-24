@@ -47,5 +47,32 @@ module.exports = {
             console.error(err)
             res.send('internal server error')
         }
+    },
+    discover:async(req,res)=>{
+        try{
+            res.render('discover')
+           
+        }catch(err){
+            console.error(err)
+            res.send('internal server error')
+        }
+    },
+    forum:async(req,res)=>{
+        try{
+            res.render('forum')
+           
+        }catch(err){
+            console.error(err)
+            res.send('internal server error')
+        }
+    },
+    room:async(req,res)=>{
+        try{
+            res.render('room')
+           
+        }catch(err){
+            console.error(err)
+            res.send('internal server error')
+        }
     }
 }

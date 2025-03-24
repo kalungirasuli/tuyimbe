@@ -14,6 +14,9 @@ router.get('/',async(req,res)=>{
         res.send('internal server error')
     }
 })
+router.get('/discover',controller.discover)
+router.get('/forum',controller.forum)
+router.get('/room',controller.room)
 router.get('/learn',auth,controller.get)
 router.get('/domestic',controller.dom)
 router.get('/bodyparts',auth,controller.body)

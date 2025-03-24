@@ -4,12 +4,12 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ABATO TUYIGE | Children's Rhymes</title>
+  <title>ABATO TUYIGE | Discover</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
   <style>
     :root {
       --primary: #FF5A5F;
-      --secondary: #FF8C00; /* Changed to orange */
+      --secondary: #FF8C00;
       --dark: #2C3E50;
       --light: #F8F9FA;
       --gray: #F0F2F5;
@@ -87,6 +87,11 @@
       color: var(--primary);
     }
     
+    .nav-link.active {
+      color: var(--primary);
+      font-weight: 600;
+    }
+    
     .user-actions {
       display: flex;
       align-items: center;
@@ -123,7 +128,7 @@
     
     /* Hero Section */
     .hero {
-      background: linear-gradient(135deg, #000000 0%, #FF8C00 100%); /* Changed to black and orange gradient */
+      background: linear-gradient(135deg, #000000 0%, #FF8C00 100%);
       padding: 60px 0;
       color: white;
       border-radius: 0 0 var(--radius) var(--radius);
@@ -159,6 +164,31 @@
       font-size: 16px;
       outline: none;
       border-radius: var(--radius);
+    }
+    
+    /* Category Pills */
+    .category-pills {
+      display: flex;
+      gap: 10px;
+      margin: 30px 0;
+      flex-wrap: wrap;
+    }
+    
+    .category-pill {
+      background-color: white;
+      color: var(--text);
+      padding: 8px 15px;
+      border-radius: 30px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 1px solid var(--gray);
+    }
+    
+    .category-pill:hover, .category-pill.active {
+      background-color: var(--secondary);
+      color: white;
+      border-color: var(--secondary);
     }
     
     /* Main Content */
@@ -203,7 +233,7 @@
       bottom: 0;
       width: 40px;
       height: 3px;
-      background-color: var(--secondary); /* Changed to orange */
+      background-color: var(--secondary);
       border-radius: 3px;
     }
     
@@ -225,7 +255,7 @@
     }
     
     .topic-item:hover {
-      background-color: var(--secondary); /* Changed to orange */
+      background-color: var(--secondary);
       color: white;
       transform: translateY(-2px);
     }
@@ -239,11 +269,29 @@
       align-items: center;
       justify-content: center;
       margin-right: 12px;
-      color: var(--secondary); /* Changed to orange */
+      color: var(--secondary);
     }
     
     .topic-item:hover .topic-icon {
-      color: var(--secondary); /* Changed to orange */
+      color: var(--secondary);
+    }
+    
+    .filter-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .filter-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .filter-checkbox {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--secondary);
     }
     
     .tag-cloud {
@@ -263,42 +311,114 @@
     }
     
     .tag:hover {
-      background-color: var(--secondary); /* Changed to orange */
+      background-color: var(--secondary);
       color: white;
     }
     
     /* Content Cards */
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 25px;
-    }
-    
     .section-title {
       font-size: 24px;
       margin-bottom: 20px;
       color: var(--dark);
     }
     
-    .content-tabs {
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .view-options {
       display: flex;
       gap: 15px;
-      margin-bottom: 25px;
+      align-items: center;
     }
     
-    .tab {
-      padding: 10px 20px;
-      background-color: var(--gray);
-      border-radius: var(--radius);
-      cursor: pointer;
-      transition: var(--transition);
+    .view-option {
       color: var(--text);
-      font-weight: 500;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      transition: var(--transition);
     }
     
-    .tab.active {
-      background-color: var(--secondary); /* Changed to orange */
-      color: white;
+    .view-option:hover, .view-option.active {
+      color: var(--secondary);
+    }
+    
+    .sort-dropdown {
+      padding: 8px 15px;
+      border-radius: var(--radius);
+      border: 1px solid var(--gray);
+      background-color: white;
+      color: var(--text);
+      font-size: 14px;
+      cursor: pointer;
+    }
+    
+    .trending-section {
+      margin-bottom: 40px;
+    }
+    
+    .trending-container {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      padding: 10px 0;
+      scroll-behavior: smooth;
+    }
+    
+    .trending-card {
+      min-width: 250px;
+      background-color: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      flex-shrink: 0;
+      transition: var(--transition);
+    }
+    
+    .trending-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .trending-media {
+      width: 100%;
+      height: 150px;
+      position: relative;
+      background-color: var(--gray);
+    }
+    
+    .trending-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .trending-content {
+      padding: 15px;
+    }
+    
+    .trending-title {
+      font-size: 16px;
+      margin-bottom: 8px;
+      color: var(--dark);
+    }
+    
+    .trending-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text);
+    }
+    
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 25px;
     }
     
     .card {
@@ -369,7 +489,46 @@
     }
     
     .action-btn:hover {
-      color: var(--secondary); /* Changed to orange */
+      color: var(--secondary);
+    }
+    
+    .card-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: var(--secondary);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 40px;
+    }
+    
+    .page-btn {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      border: 1px solid var(--gray);
+      background-color: white;
+      color: var(--text);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .page-btn:hover, .page-btn.active {
+      background-color: var(--secondary);
+      color: white;
+      border-color: var(--secondary);
     }
     
     /* Footer */
@@ -405,7 +564,7 @@
     }
     
     .footer-link:hover {
-      color: var(--secondary); /* Changed to orange */
+      color: var(--secondary);
     }
     
     .footer-bottom {
@@ -429,7 +588,7 @@
     }
     
     .social-link:hover {
-      color: var(--secondary); /* Changed to orange */
+      color: var(--secondary);
     }
     
     @media (max-width: 992px) {
@@ -495,7 +654,7 @@
           <a href="/learn" class="nav-link">
             <i class="fas fa-graduation-cap"></i> Learn
           </a>
-          <a href="/discover" class="nav-link">
+          <a href="/discover" class="nav-link active">
             <i class="fas fa-compass"></i> Discover
           </a>
         </div>
@@ -515,10 +674,10 @@
   <section class="hero">
     <div class="container">
       <div class="hero-content">
-        <h1>Children's Rhymes for Learning and Fun</h1>
-        <p>Explore our collection of educational rhymes designed to make learning enjoyable for children of all ages.</p>
+        <h1>Discover New Educational Content</h1>
+        <p>Explore our vast library of children's rhymes, songs, and educational content tailored to different learning styles and ages.</p>
         <div class="search-container">
-          <input type="text" class="search-input" placeholder="Search for rhymes, topics, or themes...">
+          <input type="text" class="search-input" placeholder="Search by keyword, age group, or learning topic...">
           <button class="btn btn-primary">
             <i class="fas fa-search"></i> Search
           </button>
@@ -528,67 +687,256 @@
   </section>
   
   <main class="container">
+    <div class="category-pills">
+      <div class="category-pill active">All Content</div>
+      <div class="category-pill">Alphabet</div>
+      <div class="category-pill">Numbers</div>
+      <div class="category-pill">Animals</div>
+      <div class="category-pill">Colors</div>
+      <div class="category-pill">Shapes</div>
+      <div class="category-pill">Body Parts</div>
+      <div class="category-pill">Nature</div>
+      <div class="category-pill">Seasons</div>
+    </div>
+    
+    <section class="trending-section">
+      <div class="section-header">
+        <h2 class="section-title">Trending This Week</h2>
+      </div>
+      <div class="trending-container">
+        <div class="trending-card">
+          <div class="trending-media">
+            <img class="trending-image" src="/api/placeholder/400/320" alt="Trending Content">
+          </div>
+          <div class="trending-content">
+            <h3 class="trending-title">Animal Sounds for Kids</h3>
+            <div class="trending-meta">
+              <span><i class="fas fa-play"></i> 12K views</span>
+              <span><i class="fas fa-heart"></i> 857</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="trending-card">
+          <div class="trending-media">
+            <img class="trending-image" src="/api/placeholder/400/320" alt="Trending Content">
+          </div>
+          <div class="trending-content">
+            <h3 class="trending-title">Seasons Song</h3>
+            <div class="trending-meta">
+              <span><i class="fas fa-play"></i> 9.5K views</span>
+              <span><i class="fas fa-heart"></i> 643</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="trending-card">
+          <div class="trending-media">
+            <img class="trending-image" src="/api/placeholder/400/320" alt="Trending Content">
+          </div>
+          <div class="trending-content">
+            <h3 class="trending-title">Five Senses Song</h3>
+            <div class="trending-meta">
+              <span><i class="fas fa-play"></i> 8.2K views</span>
+              <span><i class="fas fa-heart"></i> 532</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="trending-card">
+          <div class="trending-media">
+            <img class="trending-image" src="/api/placeholder/400/320" alt="Trending Content">
+          </div>
+          <div class="trending-content">
+            <h3 class="trending-title">Counting to 20</h3>
+            <div class="trending-meta">
+              <span><i class="fas fa-play"></i> 7.8K views</span>
+              <span><i class="fas fa-heart"></i> 487</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="trending-card">
+          <div class="trending-media">
+            <img class="trending-image" src="/api/placeholder/400/320" alt="Trending Content">
+          </div>
+          <div class="trending-content">
+            <h3 class="trending-title">Colors in Nature</h3>
+            <div class="trending-meta">
+              <span><i class="fas fa-play"></i> 6.9K views</span>
+              <span><i class="fas fa-heart"></i> 421</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
     <div class="content-grid">
       <aside class="sidebar">
         <div class="sidebar-section">
-          <h3 class="sidebar-title">Suggested Topics</h3>
+          <h3 class="sidebar-title">Filters</h3>
+          <div class="filter-list">
+            <div class="filter-item">
+              <input type="checkbox" id="filter-video" class="filter-checkbox">
+              <label for="filter-video">Videos</label>
+            </div>
+            <div class="filter-item">
+              <input type="checkbox" id="filter-audio" class="filter-checkbox">
+              <label for="filter-audio">Audio</label>
+            </div>
+            <div class="filter-item">
+              <input type="checkbox" id="filter-interactive" class="filter-checkbox">
+              <label for="filter-interactive">Interactive</label>
+            </div>
+            <div class="filter-item">
+              <input type="checkbox" id="filter-printable" class="filter-checkbox">
+              <label for="filter-printable">Printable</label>
+            </div>
+          </div>
+        </div>
+        
+        <div class="sidebar-section">
+          <h3 class="sidebar-title">Age Group</h3>
+          <div class="filter-list">
+            <div class="filter-item">
+              <input type="checkbox" id="age-0-3" class="filter-checkbox">
+              <label for="age-0-3">0-3 years</label>
+            </div>
+            <div class="filter-item">
+              <input type="checkbox" id="age-3-5" class="filter-checkbox">
+              <label for="age-3-5">3-5 years</label>
+            </div>
+            <div class="filter-item">
+              <input type="checkbox" id="age-5-7" class="filter-checkbox">
+              <label for="age-5-7">5-7 years</label>
+            </div>
+            <div class="filter-item">
+              <input type="checkbox" id="age-7-10" class="filter-checkbox">
+              <label for="age-7-10">7-10 years</label>
+            </div>
+          </div>
+        </div>
+        
+        <div class="sidebar-section">
+          <h3 class="sidebar-title">Popular Topics</h3>
           <div class="topic-list">
-            <a href="/topics/domestic-animals" class="topic-item">
+            <a href="/topics/counting" class="topic-item">
+              <div class="topic-icon">
+                <i class="fas fa-sort-numeric-up"></i>
+              </div>
+              <span>Counting & Numbers</span>
+            </a>
+            <a href="/topics/alphabet" class="topic-item">
+              <div class="topic-icon">
+                <i class="fas fa-font"></i>
+              </div>
+              <span>Alphabet & Phonics</span>
+            </a>
+            <a href="/topics/animals" class="topic-item">
               <div class="topic-icon">
                 <i class="fas fa-paw"></i>
               </div>
-              <span>Domestic Animals</span>
+              <span>Animals & Wildlife</span>
             </a>
-            <a href="/topics/body-parts" class="topic-item">
+            <a href="/topics/music" class="topic-item">
               <div class="topic-icon">
-                <i class="fas fa-child"></i>
+                <i class="fas fa-music"></i>
               </div>
-              <span>Body Parts</span>
-            </a>
-            <a href="/topics/physical-features" class="topic-item">
-              <div class="topic-icon">
-                <i class="fas fa-eye"></i>
-              </div>
-              <span>Physical Features</span>
-            </a>
-            <a href="/topics/colors" class="topic-item">
-              <div class="topic-icon">
-                <i class="fas fa-palette"></i>
-              </div>
-              <span>Colors</span>
+              <span>Music & Rhythm</span>
             </a>
           </div>
         </div>
         
         <div class="sidebar-section">
-          <h3 class="sidebar-title">Discover</h3>
+          <h3 class="sidebar-title">Popular Tags</h3>
           <div class="tag-cloud">
-            <a href="#" class="tag">#childrensbook</a>
-            <a href="#" class="tag">#summeressentials</a>
-            <a href="#" class="tag">#childsmusic</a>
-            <a href="#" class="tag">#childhoodmemories</a>
-            <a href="#" class="tag">#whoisbetter</a>
-            <a href="#" class="tag">#uganimations</a>
-            <a href="#" class="tag">#music</a>
-            <a href="#" class="tag">#memories</a>
-            <a href="#" class="tag">#learning</a>
-            <a href="#" class="tag">#education</a>
+            <a href="#" class="tag">#nurseryrhymes</a>
+            <a href="#" class="tag">#educational</a>
+            <a href="#" class="tag">#funlearning</a>
+            <a href="#" class="tag">#animations</a>
+            <a href="#" class="tag">#singalong</a>
+            <a href="#" class="tag">#earlydevelopment</a>
+            <a href="#" class="tag">#interactive</a>
+            <a href="#" class="tag">#kids</a>
+            <a href="#" class="tag">#homeschool</a>
+            <a href="#" class="tag">#preschool</a>
           </div>
         </div>
       </aside>
       
       <div class="content-section">
-        <h2 class="section-title">Featured Rhymes</h2>
-        
-        <div class="content-tabs">
-          <div class="tab active">All</div>
-          <div class="tab">Videos</div>
-          <div class="tab">Audio</div>
-          <div class="tab">New</div>
+        <div class="section-header">
+          <h2 class="section-title">Explore All Content</h2>
+          <div class="view-options">
+            <select class="sort-dropdown">
+              <option>Most Popular</option>
+              <option>Newest First</option>
+              <option>Oldest First</option>
+              <option>A-Z</option>
+            </select>
+            <button class="view-option active">
+              <i class="fas fa-th-large"></i>
+            </button>
+            <button class="view-option">
+              <i class="fas fa-list"></i>
+            </button>
+          </div>
         </div>
         
         <div class="card-grid">
-          <!-- Video Card 1 -->
+          <!-- Card 1 -->
+          <div class="card">
+            <div class="card-media">
+              <video controls class="video-player">
+                <source src="/api/placeholder/400/320" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <div class="card-badge">New</div>
+            </div>
+            <div class="card-content">
+              <h3 class="card-title">Alphabet Adventure</h3>
+              <p class="card-description">Join the alphabet characters as they go on an adventure and learn the sounds each letter makes.</p>
+              <div class="card-actions">
+                <button class="action-btn">
+                  <i class="far fa-heart"></i> 315
+                </button>
+                <button class="action-btn">
+                  <i class="far fa-comment"></i> 42
+                </button>
+                <button class="action-btn">
+                  <i class="fas fa-share"></i> Share
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Card 2 -->
+          <div class="card">
+            <div class="card-media">
+              <img class="card-image" src="/api/placeholder/400/320" alt="Counting Song">
+            </div>
+            <div class="card-content">
+              <h3 class="card-title">Counting with Animals</h3>
+              <p class="card-description">Children can learn to count from 1 to 10 with friendly animal characters and catchy tunes.</p>
+              <audio controls class="audio-player">
+                <source src="#" type="audio/mpeg">
+                Your browser does not support the audio element.
+              </audio>
+              <div class="card-actions">
+                <button class="action-btn">
+                  <i class="far fa-heart"></i> 287
+                </button>
+                <button class="action-btn">
+                  <i class="far fa-comment"></i> 35
+                </button>
+                <button class="action-btn">
+                  <i class="fas fa-share"></i> Share
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Card 3 -->
           <div class="card">
             <div class="card-media">
               <video controls class="video-player">
@@ -597,91 +945,14 @@
               </video>
             </div>
             <div class="card-content">
-              <h3 class="card-title">Farm Animals Song</h3>
-              <p class="card-description">Learn about different farm animals and the sounds they make with this catchy rhyme.</p>
-              <div class="card-actions">
-                <button class="action-btn">
-                  <i class="far fa-heart"></i> 245
-                </button>
-                <button class="action-btn">
-                  <i class="far fa-comment"></i> 32
-                </button>
-                <button class="action-btn">
-                  <i class="fas fa-share"></i> Share
-                </button>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Audio Card 1 -->
-          <div class="card">
-            <div class="card-media">
-              <img class="card-image" src="/api/placeholder/400/320" alt="Numbers Rhyme">
-            </div>
-            <div class="card-content">
-              <h3 class="card-title">Numbers 1-10 Rhyme</h3>
-              <p class="card-description">A fun song to help children learn to count from one to ten with colorful visuals.</p>
-              <audio controls class="audio-player">
-                <source src="#" type="audio/mpeg">
-                Your browser does not support the audio element.
-              </audio>
-              <div class="card-actions">
-                <button class="action-btn">
-                  <i class="far fa-heart"></i> 187
-                </button>
-                <button class="action-btn">
-                  <i class="far fa-comment"></i> 15
-                </button>
-                <button class="action-btn">
-                  <i class="fas fa-share"></i> Share
-                </button>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Video Card 2 -->
-          <div class="card">
-            <div class="card-media">
-              <video controls class="video-player">
-                <source src="/api/placeholder/400/320" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
-            </div>
-            <div class="card-content">
-              <h3 class="card-title">Body Parts Song</h3>
-              <p class="card-description">An interactive song that teaches children about different parts of the body.</p>
-              <div class="card-actions">
-                <button class="action-btn">
-                  <i class="far fa-heart"></i> 312
-                </button>
-                <button class="action-btn">
-                  <i class="far fa-comment"></i> 47
-                </button>
-                <button class="action-btn">
-                  <i class="fas fa-share"></i> Share
-                </button>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Audio Card 2 -->
-          <div class="card">
-            <div class="card-media">
-              <img class="card-image" src="/api/placeholder/400/320" alt="Alphabet Rhyme">
-            </div>
-            <div class="card-content">
-              <h3 class="card-title">ABC Song</h3>
-              <p class="card-description">Learn the alphabet with this classic children's song featuring fun examples for each letter.</p>
-              <audio controls class="audio-player">
-                <source src="#" type="audio/mpeg">
-                Your browser does not support the audio element.
-              </audio>
+              <h3 class="card-title">Seasons of the Year</h3>
+              <p class="card-description">Explore the four seasons and their unique characteristics through an engaging animated song.</p>
               <div class="card-actions">
                 <button class="action-btn">
                   <i class="far fa-heart"></i> 276
                 </button>
                 <button class="action-btn">
-                  <i class="far fa-comment"></i> 29
+                  <i class="far fa-comment"></i> 31
                 </button>
                 <button class="action-btn">
                   <i class="fas fa-share"></i> Share
@@ -690,128 +961,6 @@
             </div>
           </div>
           
-          <!-- Video Card 3 -->
-          <div class="card">
-            <div class="card-media">
-              <video controls class="video-player">
-                <source src="/api/placeholder/400/320" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
-            </div>
-            <div class="card-content">
-              <h3 class="card-title">Colors Everywhere</h3>
-              <p class="card-description">A vibrant video teaching children to recognize and name different colors in their environment.</p>
-              <div class="card-actions">
-                <button class="action-btn">
-                  <i class="far fa-heart"></i> 198
-                </button>
-                <button class="action-btn">
-                  <i class="far fa-comment"></i> 21
-                </button>
-                <button class="action-btn">
-                  <i class="fas fa-share"></i> Share
-                </button>
-              </div>
-            </div>
-          </div>
           
-          <!-- Audio Card 3 -->
-          <div class="card">
-            <div class="card-media">
-              <img class="card-image" src="/api/placeholder/400/320" alt="Shapes Rhyme">
-            </div>
-            <div class="card-content">
-              <h3 class="card-title">Shapes and Forms</h3>
-              <p class="card-description">Learn to identify and name basic geometric shapes with this catchy tune.</p>
-              <audio controls class="audio-player">
-                <source src="#" type="audio/mpeg">
-                Your browser does not support the audio element.
-              </audio>
-              <div class="card-actions">
-                <button class="action-btn">
-                  <i class="far fa-heart"></i> 163
-                </button>
-                <button class="action-btn">
-                  <i class="far fa-comment"></i> 18
-                </button>
-                <button class="action-btn">
-                  <i class="fas fa-share"></i> Share
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
-  
-  <footer>
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-column">
-          <h4>About Us</h4>
-          <div class="footer-links">
-            <a href="#" class="footer-link">Our Story</a>
-            <a href="#" class="footer-link">Team</a>
-            <a href="#" class="footer-link">Careers</a>
-            <a href="#" class="footer-link">Press</a>
-          </div>
-        </div>
-        
-        <div class="footer-column">
-          <h4>Resources</h4>
-          <div class="footer-links">
-            <a href="#" class="footer-link">For Parents</a>
-            <a href="#" class="footer-link">For Teachers</a>
-            <a href="#" class="footer-link">Learning Guide</a>
-            <a href="#" class="footer-link">FAQ</a>
-          </div>
-        </div>
-        
-        <div class="footer-column">
-          <h4>Contact</h4>
-          <div class="footer-links">
-            <a href="#" class="footer-link">Help Center</a>
-            <a href="#" class="footer-link">Support</a>
-            <a href="#" class="footer-link">Feedback</a>
-            <a href="#" class="footer-link">Partnerships</a>
-          </div>
-        </div>
-        
-        <div class="footer-column">
-          <h4>Legal</h4>
-          <div class="footer-links">
-            <a href="#" class="footer-link">Terms of Service</a>
-            <a href="#" class="footer-link">Privacy Policy</a>
-            <a href="#" class="footer-link">Copyright</a>
-            <a href="#" class="footer-link">Accessibility</a>
-          </div>
-        </div>
-      </div>
-      
-      <div class="footer-bottom">
-        <p>&copy; 2025 ABATO TUYIGE. All rights reserved.</p>
-        
-        <div class="social-links">
-          <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-          <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-          <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
-          <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
-        </div>
-      </div>
-    </div>
-  </footer>
 
-  <script>
-    // Simple tab functionality
-    const tabs = document.querySelectorAll('.tab');
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        tabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-      });
-    });
-  </script>
-</body>
-</html>
+          
