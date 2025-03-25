@@ -757,6 +757,7 @@
       
       .sidebar {
         position: static;
+        margin-bottom: 30px;
       }
       
       .footer-grid {
@@ -778,28 +779,61 @@
       
       .post-avatar {
         margin: 0;
+        width: 60px;
+        height: 60px;
+      }
+
+      .modal {
+        width: 90%;
+        margin: 0 10px;
       }
     }
     
     @media (max-width: 768px) {
+      .container {
+        padding: 0 15px;
+      }
+
       .navbar {
         flex-direction: column;
         gap: 15px;
+        padding: 10px 0;
       }
       
       .nav-menu {
         width: 100%;
         justify-content: space-around;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .user-actions {
+        width: 100%;
+        justify-content: center;
       }
       
+      .hero {
+        padding: 40px 0;
+      }
+
       .hero h1 {
-        font-size: 32px;
+        font-size: 28px;
+      }
+
+      .hero p {
+        font-size: 16px;
       }
       
       .forum-header {
         flex-direction: column;
         gap: 15px;
         align-items: flex-start;
+      }
+
+      .forum-filters {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 5px;
       }
       
       .thread-meta {
@@ -817,6 +851,17 @@
         gap: 15px;
         margin-top: 10px;
       }
+
+      .category-pills {
+        overflow-x: auto;
+        padding-bottom: 10px;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .search-container {
+        flex-direction: column;
+        gap: 10px;
+      }
     }
     
     @media (max-width: 576px) {
@@ -827,17 +872,113 @@
       .footer-bottom {
         flex-direction: column;
         gap: 20px;
+        text-align: center;
+      }
+
+      .social-links {
+        justify-content: center;
       }
       
       .thread-item {
-        padding: 15px;
+        padding: 12px;
+      }
+
+      .thread-title {
+        font-size: 16px;
+      }
+
+      .thread-preview {
+        font-size: 13px;
       }
       
       .post {
+        padding: 12px;
+      }
+
+      .post-avatar {
+        width: 50px;
+        height: 50px;
+      }
+
+      .form-input,
+      .form-textarea {
+        font-size: 14px;
+      }
+
+      .modal {
         padding: 15px;
+      }
+
+      .breadcrumb {
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .hero h1 {
+        font-size: 24px;
+      }
+
+      .btn {
+        padding: 8px 15px;
+        font-size: 14px;
+      }
+
+      .thread-meta span {
+        font-size: 12px;
       }
     }
   </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const filterModal = document.getElementById('filter-modal');
+      const allDiscussionsBtn = document.getElementById('all-discussions-btn');
+      const closeFilterModalBtn = document.getElementById('close-filter-modal');
+      const resetFiltersBtn = document.getElementById('reset-filters');
+      const applyFiltersBtn = document.getElementById('apply-filters');
+
+      // Open modal when clicking All Discussions
+      allDiscussionsBtn.addEventListener('click', () => {
+        filterModal.classList.add('active');
+      });
+
+      // Close modal functions
+      const closeModal = () => {
+        filterModal.classList.remove('active');
+      };
+
+      closeFilterModalBtn.addEventListener('click', closeModal);
+      filterModal.addEventListener('click', (e) => {
+        if (e.target === filterModal) closeModal();
+      });
+
+      // Reset filters
+      resetFiltersBtn.addEventListener('click', () => {
+        document.getElementById('filter-date-from').value = '';
+        document.getElementById('filter-date-to').value = '';
+        document.getElementById('filter-discussion-name').value = '';
+        document.getElementById('filter-tags').value = '';
+        document.getElementById('filter-location').value = '';
+        document.getElementById('filter-topic').value = '';
+      });
+
+      // Apply filters
+      applyFiltersBtn.addEventListener('click', () => {
+        const filters = {
+          dateFrom: document.getElementById('filter-date-from').value,
+          dateTo: document.getElementById('filter-date-to').value,
+          discussionName: document.getElementById('filter-discussion-name').value,
+          tags: document.getElementById('filter-tags').value,
+          location: document.getElementById('filter-location').value,
+          topic: document.getElementById('filter-topic').value
+        };
+
+        // Here you can implement the filter logic
+        console.log('Applied filters:', filters);
+        closeModal();
+      });
+    });
+  </script>
 </head>
 
 <body>
@@ -893,12 +1034,58 @@
   
   <main class="container">
     <div class="category-pills">
-      <div class="category-pill active">All Discussions</div>
+      <div class="category-pill active" id="all-discussions-btn">All Discussions</div>
       <div class="category-pill">Parenting Tips</div>
       <div class="category-pill">Learning Activities</div>
       <div class="category-pill">Teaching Resources</div>
       <div class="category-pill">Content Requests</div>
       <div class="category-pill">Development Milestones</div>
+    </div>
+
+    <!-- Filter Modal -->
+    <div class="modal-overlay" id="filter-modal">
+      <div class="modal">
+        <div class="modal-header">
+          <h3 class="modal-title">Filter Discussions</h3>
+          <button class="close-modal" id="close-filter-modal">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Date Range</label>
+          <div style="display: flex; gap: 10px;">
+            <input type="date" class="form-input" id="filter-date-from" style="width: 50%;">
+            <input type="date" class="form-input" id="filter-date-to" style="width: 50%;">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Discussion Name</label>
+          <input type="text" class="form-input" id="filter-discussion-name" placeholder="Search by discussion name...">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tag People</label>
+          <input type="text" class="form-input" id="filter-tags" placeholder="@username">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Location</label>
+          <input type="text" class="form-input" id="filter-location" placeholder="Enter location...">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Topic</label>
+          <select class="form-input" id="filter-topic">
+            <option value="">All Topics</option>
+            <option value="parenting">Parenting Tips</option>
+            <option value="learning">Learning Activities</option>
+            <option value="teaching">Teaching Resources</option>
+            <option value="requests">Content Requests</option>
+            <option value="milestones">Development Milestones</option>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline" id="reset-filters">Reset</button>
+          <button class="btn btn-primary" id="apply-filters">Apply Filters</button>
+        </div>
+      </div>
     </div>
     
     <div class="content-grid">

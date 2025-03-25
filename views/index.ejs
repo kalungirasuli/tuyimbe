@@ -407,6 +407,52 @@
     .footer-link:hover {
       color: var(--secondary); /* Changed to orange */
     }
+
+    /* Featured Resources Styles */
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 15px;
+    }
+
+    .resource-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 15px;
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .resource-meta span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .resource-meta i {
+      color: var(--secondary);
+    }
+
+    .card-actions {
+      border-top: 1px solid var(--gray);
+      padding-top: 15px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .action-btn {
+      padding: 8px 16px;
+      border-radius: var(--radius);
+      transition: var(--transition);
+      background-color: var(--gray);
+    }
+
+    .action-btn:hover {
+      background-color: var(--secondary);
+      color: white;
+    }
     
     .footer-bottom {
       display: flex;
@@ -590,6 +636,103 @@
         <div class="card-grid">
           <!-- Video Card 1 -->
           <div class="card">
+        </div>
+      </div>
+
+      <h2 class="section-title">Featured Resources</h2>
+      <div class="card-grid">
+        <!-- Resource Card 1 -->
+        <div class="card">
+          <div class="card-content">
+            <div class="card-header">
+              <h3 class="card-title">Introduction to Children's Rhymes</h3>
+              <button class="action-btn">
+                <i class="fas fa-bookmark"></i>
+              </button>
+            </div>
+            <div class="resource-meta">
+              <span class="author"><i class="fas fa-user"></i> John Doe</span>
+              <span class="date"><i class="fas fa-calendar"></i> June 15, 2023</span>
+              <span class="views"><i class="fas fa-eye"></i> 1.2k views</span>
+            </div>
+            <div class="card-actions">
+              <button class="action-btn">
+                <i class="fas fa-eye"></i> View Resource
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Resource Card 2 -->
+        <div class="card">
+          <div class="card-content">
+            <div class="card-header">
+              <h3 class="card-title">Teaching Guide: Animal Sounds</h3>
+              <button class="action-btn">
+                <i class="fas fa-bookmark"></i>
+              </button>
+            </div>
+            <div class="resource-meta">
+              <span class="author"><i class="fas fa-user"></i> Jane Smith</span>
+              <span class="date"><i class="fas fa-calendar"></i> June 14, 2023</span>
+              <span class="views"><i class="fas fa-eye"></i> 856 views</span>
+            </div>
+            <div class="card-actions">
+              <button class="action-btn">
+                <i class="fas fa-eye"></i> View Resource
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Resource Card 3 -->
+        <div class="card">
+          <div class="card-content">
+            <div class="card-header">
+              <h3 class="card-title">Color Learning Activities</h3>
+              <button class="action-btn">
+                <i class="fas fa-bookmark"></i>
+              </button>
+            </div>
+            <div class="resource-meta">
+              <span class="author"><i class="fas fa-user"></i> Mike Johnson</span>
+              <span class="date"><i class="fas fa-calendar"></i> June 13, 2023</span>
+              <span class="views"><i class="fas fa-eye"></i> 2.1k views</span>
+            </div>
+            <div class="card-actions">
+              <button class="action-btn">
+                <i class="fas fa-eye"></i> View Resource
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Resource Card 4 -->
+        <div class="card">
+          <div class="card-content">
+            <div class="card-header">
+              <h3 class="card-title">Body Parts Learning Guide</h3>
+              <button class="action-btn">
+                <i class="fas fa-bookmark"></i>
+              </button>
+            </div>
+            <div class="resource-meta">
+              <span class="author"><i class="fas fa-user"></i> Sarah Wilson</span>
+              <span class="date"><i class="fas fa-calendar"></i> June 12, 2023</span>
+              <span class="views"><i class="fas fa-eye"></i> 1.5k views</span>
+            </div>
+            <div class="card-actions">
+              <button class="action-btn">
+                <i class="fas fa-eye"></i> View Resource
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-grid">
+        <!-- Video Card 1 -->
+        <div class="card">
             <div class="card-media">
               <video controls class="video-player">
                 <source src="/api/placeholder/400/320" type="video/mp4">
